@@ -1,5 +1,5 @@
 baseURL = "/"
-title = "Goldydocs"
+title = "SOPS: Secrets OPerationS"
 
 # Language settings
 contentDir = "content/en"
