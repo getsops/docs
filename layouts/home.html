@@ -1,0 +1,98 @@
+{{ define "main" }} {{ $cncfSandboxImage := resources.Get
+"images/cncf-sandbox-horizontal-white.svg" }}
+<main aria-role="main">
+  <section
+    class="background-gradient-color flex justify-content-center hero-section"
+  >
+    <div
+      class="main-content text-center hero-container flex flex-column align-items-center"
+    >
+      <h2 class="hero-text">
+        SOPS: Simple And Flexible Tool For Managing Secrets
+      </h2>
+      <p class="hero-text-secondary">
+        <span class="hero-tags">Decrypt a file</span>
+        <span class="hero-tags">Encrypt a file using AWS</span>
+        <span class="hero-tags">Encrypt a file using GCP</span>
+        <span class="hero-tags">Encrypt a file using Azure</span>
+        <span class="hero-tags">Encrypt a file using Age</span>
+        <span class="hero-tags">Encrypt a file using PGP</span>
+        <span class="hero-tags">Edit encrypted file</span>
+        <span class="hero-tags">Edit decrypted file</span>
+      </p>
+      <div class="btn-container">
+        <a href="/docs">
+          <button class="button btn-primary">Learn More</button>
+        </a>
+        <a href="/docs/#download">
+          <button class="button btn-secondary">Download</button>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="feature-section feature-section-mobile text-wrapping">
+    <div
+      class="main-content flex justify-content-space-around feature-container"
+    >
+      <div class="feature-item">
+        <h4><i class="fa fa-exchange"></i>Key Groups</h4>
+        <p>
+          By default, SOPS encrypts the data key for a file with each of the
+          master keys, such that if any of the master keys is available, the
+          file can be decrypted. However, it is sometimes desirable to require
+          access to multiple master keys in order to decrypt files. This can be
+          achieved with key groups.
+        </p>
+      </div>
+      <div class="feature-item">
+        <h4><i class="fa-solid fa-box-open"></i>Auditing</h4>
+        <p>
+          Sometimes, users want to be able to tell what files were accessed by
+          whom in an environment they control. For this reason, SOPS can
+          generate audit logs to record activity on encrypted files. When
+          enabled, SOPS will write a log entry into a pre-configured PostgreSQL
+          database when a file is decrypted.
+        </p>
+      </div>
+    </div>
+    <div
+      class="main-content flex justify-content-space-around feature-container"
+    >
+      <div class="feature-item">
+        <h4><i class="fa-solid fa-plug fa-lg"></i>Key Service</h4>
+        <p>
+          There are situations where you might want to run SOPS on a machine
+          that doesn't have direct access to encryption keys such as PGP keys.
+          The sops key service allows you to forward a socket so that SOPS can
+          access encryption keys stored on a remote machine.
+        </p>
+      </div>
+      <div class="feature-item">
+        <h4><i class="fa-solid fa-vector-square fa-lg"></i>Security</h4>
+        <p>
+          The security of the data stored using SOPS is as strong as the weakest
+          cryptographic mechanism. Values are encrypted using AES256_GCM which
+          is the strongest symmetric encryption algorithm known today. Data keys
+          are encrypted in either KMS, which also uses AES256_GCM, or PGP which
+          uses either RSA or ECDSA keys.
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="banner text-center">
+    <p>
+      SOPS is a
+      <a
+        href="https://www.cncf.io/sandbox-projects/"
+        class="banner-link"
+        target="_blank"
+      >
+        Cloud Native Computing Foundation sandbox project
+      </a>
+    </p>
+    <div class="img-container">
+      <img src="{{ $cncfSandboxImage.RelPermalink }}" alt="cncf logo" />
+    </div>
+  </div>
+</main>
+{{ end }}
