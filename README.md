@@ -1,4 +1,6 @@
 # Docsy Example
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgetsops%2Fdocs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgetsops%2Fdocs?ref=badge_shield)
+
 
 [Docsy][] is a [Hugo theme module][] for technical documentation sites, providing easy
 site navigation, structure, and more. This **Docsy Example Project** uses the Docsy
@@ -182,3 +184,7 @@ See this [section](https://www.docsy.dev/docs/get-started/docsy-as-module/instal
 [Hugo theme module]: https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme
 [Netlify]: https://netlify.com
 [Docker Compose documentation]: https://docs.docker.com/compose/gettingstarted/
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgetsops%2Fdocs.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgetsops%2Fdocs?ref=badge_large)
