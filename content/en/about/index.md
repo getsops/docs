@@ -1,6 +1,7 @@
 ---
 title: About Goldydocs
 linkTitle: About
+draft: true
 ---
 
 {{% blocks/cover title="About Goldydocs" image_anchor="bottom" height="auto" %}}
