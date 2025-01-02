@@ -1514,6 +1514,24 @@ The value must be formatted as json.
 $ sops set ~/git/svc/sops/example.yaml '["an_array"][1]' '{"uid1":null,"uid2":1000,"uid3":["bob"]}'
 ```
 
+## Unset a sub-part in a document tree
+
+Symmetrically, SOPS can unset a specific part of a YAML or JSON document, by providing
+the path in the `unset` command. This is useful to unset specific values, like keys, without
+needing an editor.
+
+``` sh
+$ sops unset ~/git/svc/sops/example.yaml '["app2"]["key"]'
+```
+
+The tree path syntax uses regular python dictionary syntax, without the
+variable name. Set to keys by naming them, and array elements by
+numbering them.
+
+``` sh
+$ sops unset ~/git/svc/sops/example.yaml '["an_array"][1]'
+```
+
 ## Showing diffs in cleartext in git
 
 You most likely want to store encrypted files in a version controlled
