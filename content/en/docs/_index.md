@@ -203,6 +203,22 @@ can use the example files and pgp key provided with the repository:
 
 This last step will decrypt `example.yaml` using the test private key.
 
+## Encrypting with GnuPG subkeys
+
+If you want to encrypt with specific GnuPG subkeys, it does not suffice to provide the
+exact key ID of the subkey to SOPS, since GnuPG might use *another* subkey instead
+to encrypt the file key with. To force GnuPG to use a specific subkey, you need to
+append `!` to the key's fingerprint.
+
+``` yaml
+creation_rules:
+    - pgp: >-
+        85D77543B3D624B63CEA9E6DBC17301B491B3F21!,
+        E60892BB9BD89A69F759A1A0A3D652173B763E8F!
+```
+
+Please note that this is only passed on correctly to GnuPG since SOPS 3.9.3.
+
 ## Encrypting using age
 
 [age](https://age-encryption.org/) is a simple, modern, and secure tool
@@ -233,6 +249,28 @@ ignored. Each identity will be tried in sequence until one is able to
 decrypt the data.
 
 Encrypting with SSH keys via age is not yet supported by SOPS.
+
+A list of age recipients can be added to the `.sops.yaml`:
+
+``` yaml
+creation_rules:
+    - age: >-
+        age1s3cqcks5genc6ru8chl0hkkd04zmxvczsvdxq99ekffe4gmvjpzsedk23c,
+        age1qe5lxzzeppw5k79vxn3872272sgy224g2nzqlzy3uljs84say3yqgvd0sw
+```
+
+It is also possible to use `updatekeys`, when adding or removing age recipients. For example:
+
+``` sh
+$ sops updatekeys secret.enc.yaml
+2022/02/09 16:32:02 Syncing keys for file /iac/solution1/secret.enc.yaml
+The following changes will be made to the file's groups:
+Group 1
+    age1s3cqcks5genc6ru8chl0hkkd04zmxvczsvdxq99ekffe4gmvjpzsedk23c
++++ age1qe5lxzzeppw5k79vxn3872272sgy224g2nzqlzy3uljs84say3yqgvd0sw
+Is this okay? (y/n):y
+2022/02/09 16:32:04 File /iac/solution1/secret.enc.yaml synced with new keys
+```
 
 ## Encrypting using GCP KMS
 
@@ -688,6 +726,9 @@ It is often tedious to specify the `--kms` `--gcp-kms` `--pgp` and
 stored under a specific directory, like a `git` repository, you can
 create a `.sops.yaml` configuration file at the root directory to define
 which keys are used for which filename.
+
+Note: The file needs to be named `.sops.yaml`. Other names (i.e. `.sops.yml`) won't be automatically
+discovered by sops. You'll need to pass the `--config .sops.yml` option for it to be picked up.
 
 Let\'s take an example:
 
@@ -1514,6 +1555,24 @@ The value must be formatted as json.
 $ sops set ~/git/svc/sops/example.yaml '["an_array"][1]' '{"uid1":null,"uid2":1000,"uid3":["bob"]}'
 ```
 
+## Unset a sub-part in a document tree
+
+Symmetrically, SOPS can unset a specific part of a YAML or JSON document, by providing
+the path in the `unset` command. This is useful to unset specific values, like keys, without
+needing an editor.
+
+``` sh
+$ sops unset ~/git/svc/sops/example.yaml '["app2"]["key"]'
+```
+
+The tree path syntax uses regular python dictionary syntax, without the
+variable name. Set to keys by naming them, and array elements by
+numbering them.
+
+``` sh
+$ sops unset ~/git/svc/sops/example.yaml '["an_array"][1]'
+```
+
 ## Showing diffs in cleartext in git
 
 You most likely want to store encrypted files in a version controlled
@@ -1597,10 +1656,20 @@ will not encrypt the values under the `description` and `metadata` keys
 in a YAML file containing kubernetes secrets, while encrypting
 everything else.
 
+For YAML files, another method is to use `--encrypted-comment-regex` which will
+only encrypt comments and values which have a preceding comment matching the supplied
+regular expression.
+
+Conversely, you can opt in to only left certain keys without encrypting by using the
+`--unencrypted-comment-regex` option, which will leave the values and comments
+unencrypted when they have a preeceding comment, or a trailing comment on the same line,
+that matches the supplied regular expression.
+
 You can also specify these options in the `.sops.yaml` config file.
 
-Note: these four options `--unencrypted-suffix`, `--encrypted-suffix`,
-`--encrypted-regex` and `--unencrypted-regex` are mutually exclusive and
+Note: these six options `--unencrypted-suffix`, `--encrypted-suffix`,
+`--encrypted-regex`, `--unencrypted-regex`, `--encrypted-comment-regex`,
+and `--unencrypted-comment-regex` are mutually exclusive and
 cannot all be used in the same file.
 
 # Encryption Protocol
