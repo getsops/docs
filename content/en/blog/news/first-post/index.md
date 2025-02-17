@@ -11,6 +11,7 @@ resources:
     title: "Image #:counter"
     params:
       byline: "Photo: Riona MacNamara / CC-BY-CA"
+draft: true
 ---
 
 **This is a typical blog post that includes images.**
