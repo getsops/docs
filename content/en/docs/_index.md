@@ -542,7 +542,7 @@ be disabled by supplying the `-y` flag.
 ### `rotate` command
 
 The `rotate` command generates a new data encryption key and reencrypt
-all values with the new key. At te same time, the command line flag
+all values with the new key. At the same time, the command line flag
 `--add-kms`, `--add-pgp`, `--add-gcp-kms`, `--add-azure-kv`, `--rm-kms`,
 `--rm-pgp`, `--rm-gcp-kms` and `--rm-azure-kv` can be used to add and
 remove keys from a file. These flags use the comma separated syntax as
