@@ -2310,6 +2310,6 @@ encrypted files by hand\...
 
 ------------------------------------------------------------------------
 
-![CNCF Sandbox Project](docs/images/cncf-color-bg.svg){width="400px"}
+![CNCF Sandbox Project](docs/images/cncf-color-bg.svg)
 
 **We are a [Cloud Native Computing Foundation](https://cncf.io) sandbox project.**
