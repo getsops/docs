@@ -243,7 +243,7 @@ user configuration directory.
   - Looks for `keys.txt` in `$HOME/Library/Application Support/sops/age/keys.txt`.
 
 * **Windows**
-  - Looks for `keys.txt` in `%AppData%\sops\age\keys.txt`.
+  - Looks for `keys.txt` in `%AppData%\\sops\\age\\keys.txt`.
 
 You can override the default lookup by:
 
