@@ -271,9 +271,12 @@ Is this okay? (y/n):y
 
 ## Encrypting using GCP KMS
 
-GCP KMS uses [Application Default
-Credentials](https://developers.google.com/identity/protocols/application-default-credentials).
-If you already logged in using
+GCP KMS has support for authorization with the use of
+[Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials)
+and using an OAuth 2.0 token. Application default credentials precedes
+the use of access token.
+
+Using Application Default Credentials you can authorize by doing this:
 
 ``` sh
 $ gcloud auth login
@@ -283,6 +286,18 @@ you can enable application default credentials using the sdk:
 
 ``` sh
 $ gcloud auth application-default login
+```
+
+Using OAauth tokens you can authorize by doing this:
+
+``` sh
+$ export GOOGLE_OAUTH_ACCESS_TOKEN=<your access token>
+```
+
+Or if you are logged in you can authorize by generating an access token:
+
+``` sh
+$ export GOOGLE_OAUTH_ACCESS_TOKEN="$(gcloud auth print-access-token)"
 ```
 
 Encrypting/decrypting with GCP KMS requires a KMS ResourceID. You can
