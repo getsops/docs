@@ -1,77 +1,79 @@
 ---
 title: "SOPS: Secrets OPerationS"
+description: Simple And Flexible Tool For Managing Secrets  
 ---
 
-{{< blocks/cover title="Welcome to Goldydocs: A Docsy Example Project!" image_anchor="top" height="full" >}}
-<a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/">
-  Learn More <i class="fas fa-arrow-alt-circle-right ms-2"></i>
-</a>
-<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/google/docsy-example">
-  Download <i class="fab fa-github ms-2 "></i>
-</a>
-<p class="lead mt-5">Porridge temperature assessment &mdash; in the cloud!</p>
-{{< blocks/link-down color="info" >}}
-{{< /blocks/cover >}}
+{{% blocks/cover color="white" title="SOPS: Secrets OPerationS" height="full td-below-navbar" %}}
+  {{% _param description %}}
+  {.display-6}
 
+  <div class="flex flex-column align-items-center">
+  <p class="hero-text-secondary">
+    <span class="hero-tags">Decrypt a file</span>
+    <span class="hero-tags">Encrypt a file using AWS</span>
+    <span class="hero-tags">Encrypt a file using GCP</span>
+    <span class="hero-tags">Encrypt a file using Azure</span>
+    <span class="hero-tags">Encrypt a file using Age</span>
+    <span class="hero-tags">Encrypt a file using PGP</span>
+    <span class="hero-tags">Edit encrypted file</span>
+    <span class="hero-tags">Edit decrypted file</span>
+  </p>
+  </div>
 
-{{% blocks/lead color="primary" %}}
-Goldydocs provides a single web UI providing visibility into porridge
-temperature, chair size, and bed softness metrics! You can even find out who's
-been eating **your** porridge.
+  <div class="td-cta-buttons my-5">
+    <a {{% _param btn-lg primary %}} href="docs/">
+      Learn more
+    </a>
+    <a {{% _param btn-lg secondary %}} href="/docs/#download">
+      Download
+    </a>
+  </div>
 
-(Sadly, Goldydocs isn't a real project, but you can use this site as an example
-to create your own real websites with [Docsy](https://docsy.dev))
-{{% /blocks/lead %}}
+  {{% blocks/link-down %}}
+{{% /blocks/cover %}}
 
+{{% blocks/section color="white" type="row" %}}
 
-{{% blocks/section color="dark" type="row" %}}
-{{% blocks/feature icon="fa-lightbulb" title="New chair metrics!" %}}
-The Goldydocs UI now shows chair size metrics by default.
+  {{% blocks/feature title="Key Groups" icon="fab fa-exchange fa-lg" %}}
+  By default, SOPS encrypts the data key for a file with each of the
+  master keys, such that if any of the master keys is available, the
+  file can be decrypted. However, it is sometimes desirable to require
+  access to multiple master keys in order to decrypt files. This can be
+  achieved with key groups.
+  {{% /blocks/feature %}}
 
-Please follow this space for updates!
-{{% /blocks/feature %}}
+  {{% blocks/feature title="Auditing" icon="fab fa-box-open fa-lg" %}}
+  Sometimes, users want to be able to tell what files were accessed by
+  whom in an environment they control. For this reason, SOPS can
+  generate audit logs to record activity on encrypted files. When
+  enabled, SOPS will write a log entry into a pre-configured PostgreSQL
+  database when a file is decrypted.
+  {{% /blocks/feature %}}
 
+  {{% blocks/feature title="Key Service" icon="fab fa-plug fa-lg" %}}
+  There are situations where you might want to run SOPS on a machine
+  that doesn't have direct access to encryption keys such as PGP keys.
+  The sops key service allows you to forward a socket so that SOPS can
+  access encryption keys stored on a remote machine.
+  {{% /blocks/feature %}}
 
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/google/docsy-example" %}}
-We do a [Pull Request](https://github.com/google/docsy-example/pulls) contributions workflow on **GitHub**. New users are always welcome!
-{{% /blocks/feature %}}
-
-
-{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/docsydocs" %}}
-For announcement of latest features etc.
-{{% /blocks/feature %}}
-
-
-{{% /blocks/section %}}
-
-
-{{% blocks/section %}}
-This is the second section
-{.h1 .text-center}
-{{% /blocks/section %}}
-
-
-{{% blocks/section type="row" %}}
-
-{{% blocks/feature icon="fab fa-app-store-ios" title="Download **from AppStore**" %}}
-Get the Goldydocs app!
-{{% /blocks/feature %}}
-
-{{% blocks/feature icon="fab fa-github" title="Contributions welcome!"
-    url="https://github.com/google/docsy-example" %}}
-We do a [Pull Request](https://github.com/google/docsy-example/pulls)
-contributions workflow on **GitHub**. New users are always welcome!
-{{% /blocks/feature %}}
-
-{{% blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!"
-    url="https://twitter.com/GoHugoIO" %}}
-For announcement of latest features etc.
-{{% /blocks/feature %}}
+  {{% blocks/feature title="Security" icon="fab fa-vector-square fa-lg" %}}
+  The security of the data stored using SOPS is as strong as the weakest
+  cryptographic mechanism. Values are encrypted using AES256_GCM which
+  is the strongest symmetric encryption algorithm known today. Data keys
+  are encrypted in either KMS, which also uses AES256_GCM, or PGP which
+  uses either RSA or ECDSA keys.
+  {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
 
+{{% blocks/section color="white" type="row text-center h1" %}}
 
-{{% blocks/section %}}
-This is the another section
-{.h1 .text-center}
+  SOPS is a [Cloud Native Computing Foundation sandbox project](https://www.cncf.io/sandbox-projects/)
+
+  <div class="img-container">
+  <img style="max-width: 400px;" class="dark-mode-only" alt="CNCF Sandbox Project" src="/images/cncf-sandbox-horizontal-white.svg">
+  <img style="max-width: 400px;" class="light-mode-only" alt="CNCF Sandbox Project" src="/images/cncf-sandbox-horizontal-black.svg">
+  </div>
+
 {{% /blocks/section %}}

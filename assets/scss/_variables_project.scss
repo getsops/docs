@@ -1,9 +1,6 @@
 /*
-
-Add styles or override variables from the theme here.
-
+Projects can override this file. For details, see:
+https://www.docsy.dev/docs/content/lookandfeel/#project-style-files
 */
 
-// Theme colors
-$body-bg: #0d0e11;
-$body-color: #ffffff
+$lighten-amount-for-dark-color-variant: 28% !default;
