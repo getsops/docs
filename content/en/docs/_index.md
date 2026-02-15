@@ -237,6 +237,8 @@ would be `%AppData%\sops\age\keys.txt`. You can specify the location of
 this file manually by setting the environment variable
 **SOPS_AGE_KEY_FILE**. Alternatively, you can provide the key(s)
 directly by setting the **SOPS_AGE_KEY** environment variable.
+Alternatively, you can provide a command to output the age keys
+by setting the **SOPS_AGE_KEY_CMD** environment variable.
 
 The contents of this key file should be a list of age X25519 identities,
 one per line. Lines beginning with `#` are considered comments and
