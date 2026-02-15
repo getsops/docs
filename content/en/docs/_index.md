@@ -404,24 +404,29 @@ provide the `--filename-override` option with the file's filename. The
 filename will be used to determine the input and output types, and to
 select the correct creation rule.
 
-To decrypt data, you can simply do:
+The simplest way to decrypt data from stdin is as follows:
+
+``` sh
+$ cat encrypted-data | sops decrypt > decrypted-data
+```
+
+By default, `sops` determines the input and output format from the
+provided filename. Since in this case, no filename is provided, `sops`
+will use the binary store which expects JSON input and outputs binary
+data on decryption. This is often not what you want.
+
+To avoid this, you can either provide a filename with `--filename-override`,
+or explicitly control the input and output formats by passing
+`--input-type` and `--output-type` as appropriate:
 
 ``` sh
 $ cat encrypted-data | sops decrypt --filename-override filename.yaml > decrypted-data
-```
-
-To control the input and output format, pass `--input-type` and
-`--output-type` as appropriate. By default, `sops` determines the input
-and output format from the provided filename, which is the empty string
-here, and thus will use the binary store which expects JSON input and
-outputs binary data on decryption.
-
-For example, to decrypt YAML data and obtain the decrypted result as
-YAML, use:
-
-``` sh
 $ cat encrypted-data | sops decrypt --input-type yaml --output-type yaml > decrypted-data
 ```
+
+In both cases, `sops` will assume that the data you provide is in YAML
+format, and will encode the decrypted data in YAML as well. The second
+form allows to use different formats for input and output.
 
 To encrypt, it is important to note that SOPS also uses the filename to
 look up the correct creation rule from `.sops.yaml`. Therefore, you must
