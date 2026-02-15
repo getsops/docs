@@ -26,7 +26,7 @@ Binaries and packages of the latest stable release are available at
 ## Development branch
 
 For the adventurous, unstable features are available in the
-[main]{.title-ref} branch, which you can install from source:
+[main](https://github.com/getsops/sops/commits/main/) branch, which you can install from source:
 
 ``` bash
 $ mkdir -p $GOPATH/src/github.com/getsops/sops/
@@ -35,7 +35,7 @@ $ cd $GOPATH/src/github.com/getsops/sops/
 $ make install
 ```
 
-(requires Go \>= 1.19)
+(requires Go >= 1.24)
 
 If you don\'t have Go installed, set it up with:
 
@@ -175,7 +175,7 @@ Given that, the only command a SOPS user needs is:
 $ sops edit <file>
 ```
 
-[\<file\>]{.title-ref} will be opened, decrypted, passed to a text
+`<file>` will be opened, decrypted, passed to a text
 editor (vim by default), encrypted if modified, and saved back to its
 original location. All of these steps, apart from the actual editing,
 are transparent to the user.
@@ -387,7 +387,7 @@ $ az ad sp create-for-rbac -n my-keyvault-sp
 }
 ```
 
-The [appId]{.title-ref} is the client ID, and the [password]{.title-ref}
+The `appId` is the client ID, and the `password`
 is the client secret.
 
 Encrypting/decrypting with Azure Key Vault requires the resource
@@ -662,7 +662,7 @@ sops:
 
 If no AWS profile is set, default credentials will be used.
 
-Similarly the [\--aws-profile]{.title-ref} flag can be set with the
+Similarly the `--aws-profile` flag can be set with the
 command line with any of the KMS commands.
 
 ## Assuming roles and using KMS in various AWS accounts
@@ -2310,7 +2310,6 @@ encrypted files by hand\...
 
 ------------------------------------------------------------------------
 
-![CNCF Sandbox Project](docs/images/cncf-color-bg.svg){width="400px"}
+![CNCF Sandbox Project](/images/cncf-sandbox-horizontal-white.svg)
 
-**We are a** [Cloud Native Computing Foundation](https://cncf.io)
-**sandbox project.**
+**We are a [Cloud Native Computing Foundation](https://cncf.io) sandbox project.**
