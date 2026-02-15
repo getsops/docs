@@ -196,10 +196,12 @@ environment variable as a comma separated list. The default order is
 If you want to test **SOPS** without having to do a bunch of setup, you
 can use the example files and pgp key provided with the repository:
 
-    $ git clone https://github.com/getsops/sops.git
-    $ cd sops
-    $ gpg --import pgp/sops_functional_tests_key.asc
-    $ sops edit example.yaml
+``` sh
+$ git clone https://github.com/getsops/sops.git
+$ cd sops
+$ gpg --import pgp/sops_functional_tests_key.asc
+$ sops edit example.yaml
+```
 
 This last step will decrypt `example.yaml` using the test private key.
 
@@ -304,11 +306,15 @@ projects/my-project/locations/global/keyRings/sops/cryptoKeys/sops-key ENCRYPT_D
 
 Now you can encrypt a file using:
 
-    $ sops encrypt --gcp-kms projects/my-project/locations/global/keyRings/sops/cryptoKeys/sops-key test.yaml > test.enc.yaml
+``` sh
+$ sops encrypt --gcp-kms projects/my-project/locations/global/keyRings/sops/cryptoKeys/sops-key test.yaml > test.enc.yaml
+```
 
 And decrypt it using:
 
-    $ sops decrypt test.enc.yaml
+``` sh
+$ sops decrypt test.enc.yaml
+```
 
 ## Encrypting using Azure Key Vault
 
@@ -358,7 +364,9 @@ is the client secret.
 Encrypting/decrypting with Azure Key Vault requires the resource
 identifier for a key. This has the following form:
 
-    https://${VAULT_URL}/keys/${KEY_NAME}/${KEY_VERSION}
+```
+https://${VAULT_URL}/keys/${KEY_NAME}/${KEY_VERSION}
+```
 
 To create a Key Vault and assign your service principal permissions on
 it from the commandline:
@@ -381,11 +389,15 @@ https://sops.vault.azure.net/keys/sops-key/some-string
 
 Now you can encrypt a file using:
 
-    $ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/some-string test.yaml > test.enc.yaml
+``` sh
+$ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/some-string test.yaml > test.enc.yaml
+```
 
 And decrypt it using:
 
-    $ sops decrypt test.enc.yaml
+``` sh
+$ sops decrypt test.enc.yaml
+```
 
 ## Encrypting and decrypting from other programs
 
@@ -661,8 +673,10 @@ example policy is shown below.
 You can specify a role in the `--kms` flag and `SOPS_KMS_ARN` variable
 by appending it to the ARN of the master key, separated by a **+** sign:
 
-    <KMS ARN>+<ROLE ARN>
-    arn:aws:kms:us-west-2:927034868273:key/fe86dd69-4132-404c-ab86-4269956b4500+arn:aws:iam::927034868273:role/sops-dev-xyz
+```
+<KMS ARN>+<ROLE ARN>
+arn:aws:kms:us-west-2:927034868273:key/fe86dd69-4132-404c-ab86-4269956b4500+arn:aws:iam::927034868273:role/sops-dev-xyz
+```
 
 ## AWS KMS Encryption Context
 
