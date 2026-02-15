@@ -241,7 +241,7 @@ user configuration directory.
 * **macOS**
 
   - Looks for `keys.txt` in `$XDG_CONFIG_HOME/sops/age/keys.txt`;
-  - Falls back to `$HOME/Library/Application Support/sops/age/keys.txt`.
+  - Falls back to `$HOME/Library/Application Support/sops/age/keys.txt` if `$XDG_CONFIG_HOME` isn't set.
 
 * **Windows**
   - Looks for `keys.txt` in `%AppData%\\sops\\age\\keys.txt`.
