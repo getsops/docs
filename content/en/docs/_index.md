@@ -16,14 +16,14 @@ Vault, age, and PGP.
 
 [![image](https://pkg.go.dev/badge/github.com/getsops/sops/v3.svg)](https://pkg.go.dev/github.com/getsops/sops/v3)
 
-# Download
+## Download
 
-## Stable release
+### Stable release
 
 Binaries and packages of the latest stable release are available at
 <https://github.com/getsops/sops/releases>.
 
-## Development branch
+### Development branch
 
 For the adventurous, unstable features are available in the
 [main](https://github.com/getsops/sops/commits/main/) branch, which you can install from source:
@@ -51,7 +51,7 @@ Or whatever variation of the above fits your system and shell.
 To use **SOPS** as a library, take a look at the [decrypt
 package](https://pkg.go.dev/github.com/getsops/sops/v3/decrypt).
 
-# Usage
+## Usage
 
 For a quick presentation of SOPS, check out this Youtube tutorial:
 
@@ -100,7 +100,9 @@ comma separated, in the **SOPS_PGP_FP** env variable.
 export SOPS_PGP_FP="85D77543B3D624B63CEA9E6DBC17301B491B3F21,E60892BB9BD89A69F759A1A0A3D652173B763E8F"
 ```
 
-Note: you can use both PGP and KMS simultaneously.
+> 📝 **Note**
+>
+> You can use both PGP and KMS simultaneously.
 
 Then simply call `sops edit` with a file path as argument. It will
 handle the encryption/decryption transparently and open the cleartext
@@ -185,7 +187,7 @@ specified with `--decryption-order` option or **SOPS_DECRYPTION_ORDER**
 environment variable as a comma separated list. The default order is
 `age,pgp`. Offline methods are tried first and then the remaining ones.
 
-## Test with the dev PGP key
+### Test with the dev PGP key
 
 If you want to test **SOPS** without having to do a bunch of setup, you
 can use the example files and pgp key provided with the repository:
@@ -199,7 +201,7 @@ $ sops edit example.yaml
 
 This last step will decrypt `example.yaml` using the test private key.
 
-## Encrypting with GnuPG subkeys
+### Encrypting with GnuPG subkeys
 
 If you want to encrypt with specific GnuPG subkeys, it does not suffice to provide the
 exact key ID of the subkey to SOPS, since GnuPG might use *another* subkey instead
@@ -215,7 +217,7 @@ creation_rules:
 
 Please note that this is only passed on correctly to GnuPG since SOPS 3.9.3.
 
-## Encrypting using age
+### Encrypting using age
 
 [age](https://age-encryption.org/) is a simple, modern, and secure tool
 for encrypting files. It\'s recommended to use age over PGP, if
@@ -288,7 +290,7 @@ Is this okay? (y/n):y
 2022/02/09 16:32:04 File /iac/solution1/secret.enc.yaml synced with new keys
 ```
 
-## Encrypting using GCP KMS
+### Encrypting using GCP KMS
 
 GCP KMS has support for authorization with the use of
 [Application Default Credentials](https://developers.google.com/identity/protocols/application-default-credentials)
@@ -345,7 +347,7 @@ And decrypt it using:
 $ sops decrypt test.enc.yaml
 ```
 
-## Encrypting using Azure Key Vault
+### Encrypting using Azure Key Vault
 
 The Azure Key Vault integration uses the [default credential
 chain](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/azidentity#DefaultAzureCredential)
@@ -441,7 +443,7 @@ And decrypt it using:
 $ sops decrypt test.enc.yaml
 ```
 
-## Encrypting and decrypting from other programs
+### Encrypting and decrypting from other programs
 
 When using `sops` in scripts or from other programs, there are often
 situations where you do not want to write encrypted or decrypted data to
@@ -496,7 +498,7 @@ and the output store type by passing `--output-type`:
 $ echo foo=bar | sops encrypt --filename-override path/filename.sops.yaml --input-type dotenv > encrypted-data
 ```
 
-## Encrypting using Hashicorp Vault
+### Encrypting using Hashicorp Vault
 
 We assume you have an instance (or more) of Vault running and you have
 privileged access to it. For instructions on how to deploy a secure
@@ -556,7 +558,7 @@ EOF
 $ sops encrypt --verbose prod/raw.yaml > prod/encrypted.yaml
 ```
 
-## Adding and removing keys
+### Adding and removing keys
 
 When creating new files, `sops` uses the PGP, KMS and GCP KMS defined in
 the command line arguments `--kms`, `--pgp`, `--gcp-kms` or
@@ -574,7 +576,7 @@ one of three ways:
 
 The SOPS team recommends the `updatekeys` approach.
 
-### `updatekeys` command
+#### `updatekeys` command
 
 The `updatekeys` command uses the
 [.sops.yaml](#using-sops-yaml-conf-to-select-kms-pgp-for-new-files)
@@ -597,7 +599,7 @@ $ sops updatekeys test.enc.yaml
 SOPS will prompt you with the changes to be made. This interactivity can
 be disabled by supplying the `-y` flag.
 
-### `rotate` command
+#### `rotate` command
 
 The `rotate` command generates a new data encryption key and reencrypt
 all values with the new key. At the same time, the command line flag
@@ -617,7 +619,7 @@ $ sops rotate -i --add-pgp 85D77543B3D624B63CEA9E6DBC17301B491B3F21 example.yaml
 $ sops rotate -i --rm-pgp 85D77543B3D624B63CEA9E6DBC17301B491B3F21 example.yaml
 ```
 
-### Direct Editing
+#### Direct Editing
 
 Alternatively, invoking `sops edit` with the flag **-s** will display
 the master keys while editing. This method can be used to add or remove
@@ -648,7 +650,7 @@ When removing keys, it is recommended to rotate the data key using `-r`,
 otherwise, owners of the removed key may have add access to the data key
 in the past.
 
-## KMS AWS Profiles
+### KMS AWS Profiles
 
 If you want to use a specific profile, you can do so with
 \`aws_profile\`:
@@ -665,7 +667,7 @@ If no AWS profile is set, default credentials will be used.
 Similarly the `--aws-profile` flag can be set with the
 command line with any of the KMS commands.
 
-## Assuming roles and using KMS in various AWS accounts
+### Assuming roles and using KMS in various AWS accounts
 
 SOPS has the ability to use KMS in multiple AWS accounts by assuming
 roles in each account. Being able to assume roles is a nice feature of
@@ -724,7 +726,7 @@ by appending it to the ARN of the master key, separated by a **+** sign:
 arn:aws:kms:us-west-2:927034868273:key/fe86dd69-4132-404c-ab86-4269956b4500+arn:aws:iam::927034868273:role/sops-dev-xyz
 ```
 
-## AWS KMS Encryption Context
+### AWS KMS Encryption Context
 
 SOPS has the ability to use [AWS KMS key policy and encryption
 context](http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html)
@@ -764,7 +766,7 @@ shown below:
 }
 ```
 
-## Key Rotation
+### Key Rotation
 
 It is recommended to renew the data key on a regular basis. `sops`
 supports key rotation via the `rotate` command. Invoking it on an
@@ -779,7 +781,7 @@ it to stdout.
 $ sops rotate example.yaml
 ```
 
-## Using .sops.yaml conf to select KMS, PGP and age for new files
+### Using .sops.yaml conf to select KMS, PGP and age for new files
 
 It is often tedious to specify the `--kms` `--gcp-kms` `--pgp` and
 `--age` parameters for creation of all new files. If your secrets are
@@ -787,8 +789,10 @@ stored under a specific directory, like a `git` repository, you can
 create a `.sops.yaml` configuration file at the root directory to define
 which keys are used for which filename.
 
-Note: The file needs to be named `.sops.yaml`. Other names (i.e. `.sops.yml`) won't be automatically
-discovered by sops. You'll need to pass the `--config .sops.yml` option for it to be picked up.
+> 📝 **Note**
+>
+> The file needs to be named `.sops.yaml`. Other names (i.e. `.sops.yml`) won't be automatically
+> discovered by sops. You'll need to pass the `--config .sops.yml` option for it to be picked up.
 
 Let\'s take an example:
 
@@ -877,7 +881,7 @@ $ sops edit <newfile>.prod.yaml
 Note that the configuration file is ignored when KMS or PGP parameters
 are passed on the SOPS command line or in environment variables.
 
-## Specify a different GPG executable
+### Specify a different GPG executable
 
 SOPS checks for the `SOPS_GPG_EXEC` environment variable. If specified,
 it will attempt to use the executable set there instead of the default
@@ -889,7 +893,7 @@ Example: place the following in your `~/.bashrc`
 SOPS_GPG_EXEC = 'your_gpg_client_wrapper'
 ```
 
-## Key groups
+### Key groups
 
 By default, SOPS encrypts the data key for a file with each of the
 master keys, such that if any of the master keys is available, the file
@@ -1015,7 +1019,7 @@ with any other SOPS file:
 $ sops decrypt example.json
 ```
 
-## Key service
+### Key service
 
 There are situations where you might want to run SOPS on a machine that
 doesn\'t have direct access to encryption keys such as PGP keys. The
@@ -1063,7 +1067,7 @@ located in `/tmp/sops.sock` and not the local key service, you can run:
 $ sops decrypt --enable-local-keyservice=false --keyservice unix:///tmp/sops.sock file.yaml
 ```
 
-## Auditing
+### Auditing
 
 Sometimes, users want to be able to tell what files were accessed by
 whom in an environment they control. For this reason, SOPS can generate
@@ -1109,14 +1113,14 @@ backends:
         - connection_string: "postgres://sops:sops@remotehost/sops?sslmode=verify-full"
 ```
 
-## Saving Output to a File
+### Saving Output to a File
 
 By default SOPS just dumps all the output to the standard output. We can
 use the `--output` flag followed by a filename to save the output to the
 file specified. Beware using both `--in-place` and `--output` flags will
 result in an error.
 
-## Passing Secrets to Other Processes
+### Passing Secrets to Other Processes
 
 In addition to writing secrets to standard output and to files on disk,
 SOPS has two commands for passing decrypted secrets to a new process:
@@ -1220,7 +1224,7 @@ sh-3.2$ cat out.json
 cat: out.json: Permission denied
 ```
 
-## Using the publish command
+### Using the publish command
 
 `sops publish $file` publishes a file to a pre-configured destination
 (this lives in the SOPS config file). Additionally, support
@@ -1263,7 +1267,7 @@ If you don\'t want file extension to appear in destination secret path,
 use `--omit-extensions` flag or `omit_extensions: true` in the
 destination rule in `.sops.yaml`.
 
-### Publishing to Vault
+#### Publishing to Vault
 
 There are a few settings for Vault that you can place in your
 destination rules. The first is `vault_path`, which is required. The
@@ -1312,9 +1316,9 @@ example_number    42
 example_string    bar
 ```
 
-# Important information on types
+## Important information on types
 
-## YAML, JSON, ENV and INI type extensions
+### YAML, JSON, ENV and INI type extensions
 
 SOPS uses the file extension to decide which encryption method to use on
 the file content. `YAML`, `JSON`, `ENV`, and `INI` files are treated as
@@ -1349,7 +1353,7 @@ flags as follows:
 $ cat myfile.json | sops decrypt --input-type json --output-type json
 ```
 
-## JSON and JSON_binary indentation
+### JSON and JSON_binary indentation
 
 SOPS indents `JSON` files by default using one `tab`. However, you can
 change this default behaviour to use `spaces` by either using the
@@ -1366,7 +1370,7 @@ stores:
         indent: 2
 ```
 
-## YAML indentation
+### YAML indentation
 
 SOPS indents `YAML` files by default using 4 spaces. However, you can
 change this default behaviour by either using the additional
@@ -1378,19 +1382,12 @@ stores:
         indent: 2
 ```
 
-<<<<<<< HEAD
-Note: The YAML emitter used by sops only supports values between 2 and 9. If
-=======
-:::: note
-::: title
-Note
-:::
+> 📝 **Note**
+>
+> The YAML emitter used by sops only supports values between 2 and 9. If
+> you specify 1, or 10 and larger, the indent will be 2.
 
-The YAML emitter used by SOPS only supports values between 2 and 9. If
->>>>>>> ca167d4 (Document (most of) the SOPS config format.)
-you specify 1, or 10 and larger, the indent will be 2.
-
-## YAML anchors
+### YAML anchors
 
 SOPS only supports a subset of `YAML`\'s many types. Encrypting YAML
 files that contain strings, numbers and booleans will work fine, but
@@ -1417,7 +1414,7 @@ step.
 JSON and TEXT file types do not support anchors and thus have no such
 limitation.
 
-## YAML Streams
+### YAML Streams
 
 `YAML` supports having more than one \"document\" in a single file,
 while formats like `JSON` do not. SOPS is able to handle both. This
@@ -1433,7 +1430,7 @@ data: bar
 Note that the `sops` metadata, i.e. the hash, etc, is computed for the
 physical file rather than each internal \"document\".
 
-## Top-level arrays
+### Top-level arrays
 
 `YAML` and `JSON` top-level arrays are not supported, because SOPS needs
 a top-level `sops` key to store its metadata.
@@ -1479,14 +1476,14 @@ But this one will work just fine:
 }
 ```
 
-# Examples
+## Examples
 
 Take a look into the [examples
 folder](https://github.com/getsops/sops/tree/main/examples) for detailed
 use cases of SOPS in a CI environment. The section below describes
 specific tips for common use cases.
 
-## Creating a new file
+### Creating a new file
 
 The command below creates a new file with a data key encrypted by KMS
 and PGP.
@@ -1495,7 +1492,7 @@ and PGP.
 $ sops edit --kms "arn:aws:kms:us-west-2:927034868273:key/fe86dd69-4132-404c-ab86-4269956b4500" --pgp C9CAB0AF1165060DB58D6D6B2653B624D620786D /path/to/new/file.yaml
 ```
 
-## Encrypting an existing file
+### Encrypting an existing file
 
 Similar to the previous command, we tell SOPS to use one KMS and one PGP
 key. The path points to an existing cleartext file, so we give `sops`
@@ -1514,7 +1511,7 @@ Decrypt the file with `-d`.
 $ sops decrypt /path/to/new/encrypted/file.yaml
 ```
 
-## Encrypt or decrypt a file in place
+### Encrypt or decrypt a file in place
 
 Rather than redirecting the output of `-e` or `-d`, `sops` can replace
 the original file after encrypting or decrypting it.
@@ -1527,7 +1524,7 @@ $ sops decrypt -i /path/to/existing/file.yaml
 # file.yaml is back in cleartext
 ```
 
-## Encrypting binary files
+### Encrypting binary files
 
 SOPS primary use case is encrypting YAML, JSON, ENV, and INI configuration files,
 but it also has the ability to manage binary files. When encrypting a
@@ -1558,7 +1555,7 @@ $ sha512sum /tmp/somerandom
 9589bb20280e9d381f7a192000498c994e921b3cdb11d2ef5a986578dc2239a340b25ef30691bac72bdb14028270828dad7e8bd31e274af9828c40d216e60cbe /tmp/somerandom
 ```
 
-## Extract a sub-part of a document tree
+### Extract a sub-part of a document tree
 
 SOPS can extract a specific part of a YAML or JSON document, by provided
 the path in the `--extract` command line flag. This is useful to extract
@@ -1586,7 +1583,7 @@ $ sops decrypt --extract '["an_array"][1]' ~/git/svc/sops/example.yaml
 secretuser2
 ```
 
-## Set a sub-part in a document tree
+### Set a sub-part in a document tree
 
 SOPS can set a specific part of a YAML or JSON document, by providing
 the path and value in the `set` command. This is useful to set specific
@@ -1621,7 +1618,7 @@ $ sops set --value-file ~/git/svc/sops/example.yaml '["an_array"][1]' /tmp/examp
 $ echo '{"uid1":null,"uid2":1000,"uid3":["bob"]}' | sops set --value-stdin ~/git/svc/sops/example.yaml '["an_array"][1]'
 ```
 
-## Unset a sub-part in a document tree
+### Unset a sub-part in a document tree
 
 Symmetrically, SOPS can unset a specific part of a YAML or JSON document, by providing
 the path in the `unset` command. This is useful to unset specific values, like keys, without
@@ -1639,7 +1636,7 @@ numbering them.
 $ sops unset ~/git/svc/sops/example.yaml '["an_array"][1]'
 ```
 
-## Showing diffs in cleartext in git
+### Showing diffs in cleartext in git
 
 You most likely want to store encrypted files in a version controlled
 repository. SOPS can be used with git to decrypt files when showing
@@ -1671,9 +1668,11 @@ current versions of the target file prior to displaying the diff. And it
 even works with git client interfaces, because they call git diff under
 the hood!
 
-## Encrypting only parts of a file
+### Encrypting only parts of a file
 
-Note: this only works on YAML, JSON, ENV, and INI files, not on BINARY files.
+> 📝 **Note**
+>
+> This only works on YAML, JSON, ENV, and INI files, not on BINARY files.
 
 By default, SOPS encrypts all the values of a YAML, JSON, ENV, or INI file and
 leaves the keys in cleartext. In some instances, you may want to exclude
@@ -1733,12 +1732,14 @@ that matches the supplied regular expression.
 
 You can also specify these options in the `.sops.yaml` config file.
 
-Note: these six options `--unencrypted-suffix`, `--encrypted-suffix`,
-`--encrypted-regex`, `--unencrypted-regex`, `--encrypted-comment-regex`,
-and `--unencrypted-comment-regex` are mutually exclusive and
-cannot all be used in the same file.
+> 📝 **Note**
+>
+> These six options `--unencrypted-suffix`, `--encrypted-suffix`,
+> `--encrypted-regex`, `--unencrypted-regex`, `--encrypted-comment-regex`,
+> and `--unencrypted-comment-regex` are mutually exclusive and
+> cannot all be used in the same file.
 
-# Config file format
+## Config file format
 
 This section describes the format of the SOPS config file.
 The file must be named `.sops.yaml` (not `.sops.yml`!),
@@ -1758,7 +1759,7 @@ The following top-level keys are supported:
 
 The following subsections describe how these properties are used.
 
-## Creation rule object
+### Creation rule object
 
 A creation rule object has three types of keys:
 
@@ -1766,14 +1767,14 @@ A creation rule object has three types of keys:
 1. Keys that determine the (groups of) identities (keys) to encrypt with.
 1. Keys that determine which parts of and how a file is encrypted.
 
-### Matching
+#### Matching
 
 The keys related to file matching are:
 
 * `path_regex`: a regular expression matching files to encrypt.
   If not specified, this creation rule will match all files.
 
-### Identities
+#### Identities
 
 One can either directly specify identities for a single key group, or specify a list of key groups.
 If a list of key groups is given, the individual settings are ignored.
@@ -1878,7 +1879,7 @@ To specify a list of key groups, you can use the following key:
                 - https://vault.url/keys/key-name/key-version
   ```
 
-## Key group object
+### Key group object
 
 A key group contains multiple identities (keys), similar to a creation rule object.
 Having more than one key group allows for the use of [Shamir's secret sharing](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing)
@@ -1951,7 +1952,7 @@ A key group supports the following keys:
   These will be merged (by concatenating the keys of the same type) into this key group.
   This property allows for the concatenation of key groups using YAML anchors, aliases, and overrides.
 
-### Settings
+#### Settings
 
 The following keys configure encryption settings:
 
@@ -1989,7 +1990,7 @@ Note that at most, one of these keys can be used.
   All other comments and values are not encrypted.
   The matching comment itself is not encrypted.
 
-## Destination rule object
+### Destination rule object
 
 Not yet documented.
 
@@ -2009,7 +2010,7 @@ Not yet documented.
      OmitExtensions   bool         `yaml:"omit_extensions"`
  } -->
 
-## Stores configuration object
+### Stores configuration object
 
 The store configuration object can have the following keys:
 
@@ -2035,7 +2036,7 @@ The store configuration object can have the following keys:
     The YAML emitter used by sops only supports values between `2` and `9`.
     If you specify `1`, or `10` and larger, the indent will be `2`.
 
-# Encryption Protocol
+## Encryption Protocol
 
 When SOPS creates a file, it generates a random 256 bit data key and
 asks each KMS and PGP master key to encrypt the data key. The encrypted
@@ -2109,7 +2110,7 @@ one PGP public key with the private key stored offline. If, by any
 chance, both KMS master keys are lost, you can always recover the
 encrypted data using the PGP private key.
 
-## Message Authentication Code
+### Message Authentication Code
 
 In addition to authenticating branches of the tree using keys as
 additional data, SOPS computes a MAC on all the values to ensure that no
@@ -2119,7 +2120,7 @@ This behavior can be modified using `--mac-only-encrypted` flag or
 `.sops.yaml` config file which makes SOPS compute a MAC only over values
 it encrypted and not all values.
 
-# Motivation
+## Motivation
 
 > 📝 **A note from the maintainers**
 >
@@ -2138,7 +2139,7 @@ down to establishing the initial trust of a system that just joined the
 infrastructure, and providing it access to the secrets it needs to
 configure itself.
 
-## The initial trust
+### The initial trust
 
 In many infrastructures, even highly dynamic ones, the initial trust is
 established by a human. An example is seen in Puppet by the way
@@ -2157,7 +2158,7 @@ permission model and its automation infrastructure. As long as AWS keys
 are safe, and the AWS API is secure, we can assume that trust is
 maintained and systems are who they say they are.
 
-## KMS, Trust and secrets distribution
+### KMS, Trust and secrets distribution
 
 Using the AWS trust model, we can create fine grained access controls to
 Amazon\'s Key Management Service (KMS). KMS is a service that encrypts
@@ -2168,7 +2169,7 @@ the master key. KMS helps solve the problem of distributing keys, by
 shifting it into an access control problem that can be solved using
 AWS\'s trust model.
 
-## Operational requirements
+### Operational requirements
 
 When Mozilla\'s Services Operations team started revisiting the issue of
 distributing secrets to EC2 instances, we set a goal to store these
@@ -2205,7 +2206,7 @@ the years we learned to appreciate its benefits, namely:
     PGP encryption approach where unsolvable conflicts often happen when
     multiple users work on the same file.
 
-## OpenPGP integration
+### OpenPGP integration
 
 OpenPGP gets a lot of bad press for being an outdated crypto protocol,
 and while true, what really made us look for alternatives is the
@@ -2226,7 +2227,7 @@ comma-separated list of public keys when creating a new file:
 $ sops edit --pgp "E60892BB9BD89A69F759A1A0A3D652173B763E8F,84050F1D61AF7C230A12217687DF65059EF093D3,85D77543B3D624B63CEA9E6DBC17301B491B3F21" mynewfile.yaml
 ```
 
-# Threat Model
+## Threat Model
 
 The security of the data stored using SOPS is as strong as the weakest
 cryptographic mechanism. Values are encrypted using AES256_GCM which is
@@ -2237,7 +2238,7 @@ either RSA or ECDSA keys.
 Going from the most likely to the least likely, the threats are as
 follows:
 
-## Compromised AWS credentials grant access to KMS master key
+### Compromised AWS credentials grant access to KMS master key
 
 An attacker with access to an AWS console can grant itself access to one
 of the KMS master keys used to encrypt a `sops` data key. This threat
@@ -2245,7 +2246,7 @@ should be mitigated by protecting AWS accesses with strong controls,
 such as multi-factor authentication, and also by performing regular
 audits of permissions granted to AWS users.
 
-## Compromised PGP key
+### Compromised PGP key
 
 PGP keys are routinely mishandled, either because owners copy them from
 machine to machine, or because the key is left forgotten on an unused
@@ -2253,7 +2254,7 @@ machine an attacker gains access to. When using PGP encryption, SOPS
 users should take special care of PGP private keys, and store them on
 smart cards or offline as often as possible.
 
-## Factorized RSA key
+### Factorized RSA key
 
 SOPS doesn\'t apply any restriction on the size or type of PGP keys. A
 weak PGP keys, for example 512 bits RSA, could be factorized by an
@@ -2261,29 +2262,29 @@ attacker to gain access to the private key and decrypt the data key.
 Users of SOPS should rely on strong keys, such as 2048+ bits RSA keys,
 or 256+ bits ECDSA keys.
 
-## Weak AES cryptography
+### Weak AES cryptography
 
 A vulnerability in AES256_GCM could potentially leak the data key or the
 KMS master key used by a SOPS encrypted file. While no such
 vulnerability exists today, we recommend that users keep their encrypted
 files reasonably private.
 
-# Backward compatibility
+## Backward compatibility
 
 SOPS will remain backward compatible on the major version, meaning that
 all improvements brought to the 1.X and 2.X branches (current) will
 maintain the file format introduced in **1.0**.
 
-# Security
+## Security
 
 Please report any security issues privately using [GitHub\'s advisory
 form](https://github.com/getsops/sops/security/advisories).
 
-# License
+## License
 
 Mozilla Public License Version 2.0
 
-# Authors
+## Authors
 
 SOPS was initially launched as a project at Mozilla in 2015 and has been
 graciously donated to the CNCF as a Sandbox project in 2023, now under
@@ -2299,7 +2300,7 @@ Furthermore, the project has been carried for a long time by AJ Bahnken
 \@ajvb, and had not been possible without the contributions of numerous
 [contributors](https://github.com/getsops/sops/graphs/contributors).
 
-# Credits
+## Credits
 
 SOPS was inspired by
 [hiera-eyaml](https://github.com/TomPoulton/hiera-eyaml),
