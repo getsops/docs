@@ -397,6 +397,13 @@ identifier for a key. This has the following form:
 https://${VAULT_URL}/keys/${KEY_NAME}/${KEY_VERSION}
 ```
 
+You can omit the version, and have just a trailing slash, and this will use
+whatever the latest version of the key is:
+
+```
+https://${VAULT_URL}/keys/${KEY_NAME}/
+```
+
 To create a Key Vault and assign your service principal permissions on
 it from the commandline:
 
@@ -421,6 +428,15 @@ Now you can encrypt a file using:
 ``` sh
 $ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/some-string test.yaml > test.enc.yaml
 ```
+<<<<<<< HEAD
+=======
+
+or, without the version::
+
+``` sh
+$ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/ test.yaml > test.enc.yaml
+```
+>>>>>>> 26388ac (feat(azkv): Skipping key-version will get latest key)
 
 And decrypt it using:
 
