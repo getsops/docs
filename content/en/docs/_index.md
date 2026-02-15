@@ -100,7 +100,9 @@ comma separated, in the **SOPS_PGP_FP** env variable.
 export SOPS_PGP_FP="85D77543B3D624B63CEA9E6DBC17301B491B3F21,E60892BB9BD89A69F759A1A0A3D652173B763E8F"
 ```
 
-Note: you can use both PGP and KMS simultaneously.
+> 📝 **Note**
+>
+> You can use both PGP and KMS simultaneously.
 
 Then simply call `sops edit` with a file path as argument. It will
 handle the encryption/decryption transparently and open the cleartext
@@ -787,8 +789,10 @@ stored under a specific directory, like a `git` repository, you can
 create a `.sops.yaml` configuration file at the root directory to define
 which keys are used for which filename.
 
-Note: The file needs to be named `.sops.yaml`. Other names (i.e. `.sops.yml`) won't be automatically
-discovered by sops. You'll need to pass the `--config .sops.yml` option for it to be picked up.
+> 📝 **Note**
+>
+> The file needs to be named `.sops.yaml`. Other names (i.e. `.sops.yml`) won't be automatically
+> discovered by sops. You'll need to pass the `--config .sops.yml` option for it to be picked up.
 
 Let\'s take an example:
 
@@ -1378,8 +1382,10 @@ stores:
         indent: 2
 ```
 
-Note: The YAML emitter used by sops only supports values between 2 and 9. If
-you specify 1, or 10 and larger, the indent will be 2.
+> 📝 **Note**
+>
+> The YAML emitter used by sops only supports values between 2 and 9. If
+> you specify 1, or 10 and larger, the indent will be 2.
 
 ### YAML anchors
 
@@ -1664,7 +1670,9 @@ the hood!
 
 ### Encrypting only parts of a file
 
-Note: this only works on YAML, JSON, ENV, and INI files, not on BINARY files.
+> 📝 **Note**
+>
+> This only works on YAML, JSON, ENV, and INI files, not on BINARY files.
 
 By default, SOPS encrypts all the values of a YAML, JSON, ENV, or INI file and
 leaves the keys in cleartext. In some instances, you may want to exclude
@@ -1724,10 +1732,12 @@ that matches the supplied regular expression.
 
 You can also specify these options in the `.sops.yaml` config file.
 
-Note: these six options `--unencrypted-suffix`, `--encrypted-suffix`,
-`--encrypted-regex`, `--unencrypted-regex`, `--encrypted-comment-regex`,
-and `--unencrypted-comment-regex` are mutually exclusive and
-cannot all be used in the same file.
+> 📝 **Note**
+>
+> These six options `--unencrypted-suffix`, `--encrypted-suffix`,
+> `--encrypted-regex`, `--unencrypted-regex`, `--encrypted-comment-regex`,
+> and `--unencrypted-comment-regex` are mutually exclusive and
+> cannot all be used in the same file.
 
 ## Config file format
 
