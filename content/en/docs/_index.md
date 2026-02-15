@@ -399,19 +399,20 @@ situations where you do not want to write encrypted or decrypted data to
 disk. The best way to avoid this is to pass data to SOPS via stdin, and
 to let SOPS write data to stdout. By default, the encrypt and decrypt
 operations write data to stdout already. To pass data via stdin, you
-need to pass `/dev/stdin` as the input filename. Please note that this
-only works on Unix-like operating systems such as macOS and Linux. On
-Windows, you have to use named pipes.
+need to not provide an input filename. For encrpytion, you also must
+provide the `--filename-override` option with the file's filename. The
+filename will be used to determine the input and output types, and to
+select the correct creation rule.
 
 To decrypt data, you can simply do:
 
 ``` sh
-$ cat encrypted-data | sops decrypt /dev/stdin > decrypted-data
+$ cat encrypted-data | sops decrypt --filename-override filename.yaml > decrypted-data
 ```
 
 To control the input and output format, pass `--input-type` and
 `--output-type` as appropriate. By default, `sops` determines the input
-and output format from the provided filename, which is `/dev/stdin`
+and output format from the provided filename, which is the empty string
 here, and thus will use the binary store which expects JSON input and
 outputs binary data on decryption.
 
@@ -419,18 +420,16 @@ For example, to decrypt YAML data and obtain the decrypted result as
 YAML, use:
 
 ``` sh
-$ cat encrypted-data | sops decrypt --input-type yaml --output-type yaml /dev/stdin > decrypted-data
+$ cat encrypted-data | sops decrypt --input-type yaml --output-type yaml > decrypted-data
 ```
 
 To encrypt, it is important to note that SOPS also uses the filename to
-look up the correct creation rule from `.sops.yaml`. Likely `/dev/stdin`
-will not match a creation rule, or only match the fallback rule without
-`path_regex`, which is usually not what you want. For that, `sops`
-provides the `--filename-override` parameter which allows you to tell
+look up the correct creation rule from `.sops.yaml`. Therefore, you must
+provide the `--filename-override` parameter which allows you to tell
 SOPS which filename to use to match creation rules:
 
 ``` sh
-$ echo 'foo: bar' | sops encrypt --filename-override path/filename.sops.yaml /dev/stdin > encrypted-data
+$ echo 'foo: bar' | sops encrypt --filename-override path/filename.sops.yaml > encrypted-data
 ```
 
 SOPS will find a matching creation rule for `path/filename.sops.yaml` in
@@ -440,7 +439,7 @@ always, the input store type can be adjusted by passing `--input-type`,
 and the output store type by passing `--output-type`:
 
 ``` sh
-$ echo foo=bar | sops encrypt --filename-override path/filename.sops.yaml --input-type dotenv /dev/stdin > encrypted-data
+$ echo foo=bar | sops encrypt --filename-override path/filename.sops.yaml --input-type dotenv > encrypted-data
 ```
 
 ## Encrypting using Hashicorp Vault
@@ -1301,7 +1300,7 @@ When operating on stdin, use the `--input-type` and `--output-type`
 flags as follows:
 
 ``` sh
-$ cat myfile.json | sops decrypt --input-type json --output-type json /dev/stdin
+$ cat myfile.json | sops decrypt --input-type json --output-type json
 ```
 
 ## JSON and JSON_binary indentation
