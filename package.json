@@ -1,13 +1,13 @@
 {
-  "name": "docsy-example-site",
+  "name": "sops-docsite",
   "version": "0.9.1",
   "version.next": "0.9.2-dev.0-unreleased",
-  "description": "Example site that uses Docsy theme for technical documentation.",
-  "repository": "github:google/docsy-example",
-  "homepage": "https://example.docsy.dev",
-  "author": "Docsy Authors",
+  "description": "SOPS documentation site.",
+  "repository": "github:getsops/sops",
+  "homepage": "https://getsops.io",
+  "author": "SOPS authors",
   "license": "Apache-2.0",
-  "bugs": "https://github.com/google/docsy-example/issues",
+  "bugs": "https://github.com/getsops/docs/issues",
   "spelling": "cSpell:ignore HTMLTEST precheck postbuild -",
   "scripts": {
     "_build": "npm run _hugo-dev --",
@@ -36,9 +36,10 @@
     "update:pkg:hugo": "npm install --save-dev --save-exact hugo-extended@latest"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "cross-env": "^7.0.3",
-    "hugo-extended": "0.122.0",
-    "postcss-cli": "^11.0.0"
+    "autoprefixer": "^10.4.24",
+    "cross-env": "^10.1.0",
+    "hugo-extended": "0.155.3",
+    "postcss-cli": "^11.0.1",
+    "rtlcss": "^4.3.0"
   }
 }

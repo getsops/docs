@@ -2311,6 +2311,7 @@ encrypted files by hand\...
 
 ------------------------------------------------------------------------
 
-![CNCF Sandbox Project](/images/cncf-sandbox-horizontal-white.svg)
+<img style="max-width: 400px;" class="dark-mode-only" alt="CNCF Sandbox Project" src="/images/cncf-sandbox-horizontal-white.svg">
+<img style="max-width: 400px;" class="light-mode-only" alt="CNCF Sandbox Project" src="/images/cncf-sandbox-horizontal-black.svg">
 
 **We are a [Cloud Native Computing Foundation](https://cncf.io) sandbox project.**
