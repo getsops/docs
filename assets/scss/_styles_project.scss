@@ -23,3 +23,46 @@ https://www.docsy.dev/docs/content/lookandfeel/#project-style-files
     display: none;
   }
 }
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.hero-tags {
+  padding: 7px 20px;
+  color: #9ca3af;
+  background-color: #14151a;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  // overflow-wrap: break-word;
+  // word-wrap: break-word;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.hero-text-secondary {
+  width: 65%;
+  margin-top: 10px;
+  color: white;
+  font-weight: 300;
+  font-size: larger;
+}
+
+[data-bs-theme="light"] {
+  .hero-tags {
+    color: gray;
+    background-color: white;
+  }
+
+  .hero-text-secondary {
+    color: black;
+  }
+}
