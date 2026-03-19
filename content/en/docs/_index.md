@@ -373,10 +373,12 @@ which tries several authentication methods, in this order:
 
 1.  [Environment
     credentials](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/azidentity#EnvironmentCredential)
-    i.  Service Principal with Client Secret
-    ii. Service Principal with Certificate
-    iii. User with username and password
-    iv. Configuration for multi-tenant applications
+
+    1. Service Principal with Client Secret
+    2. Service Principal with Certificate
+    3. User with username and password
+    4. Configuration for multi-tenant applications
+
 2.  [Workload Identity
     credentials](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/azidentity#WorkloadIdentityCredential)
 3.  [Managed Identity
@@ -449,7 +451,7 @@ Now you can encrypt a file using:
 $ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/some-string test.yaml > test.enc.yaml
 ```
 
-or, without the version::
+or, without the version:
 
 ``` sh
 $ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/ test.yaml > test.enc.yaml
