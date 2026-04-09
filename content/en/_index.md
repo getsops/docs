@@ -9,14 +9,10 @@ description: Simple And Flexible Tool For Managing Secrets
 
   <div class="flex flex-column align-items-center">
   <p class="hero-text-secondary">
-    <span class="hero-tags">Decrypt a file</span>
-    <span class="hero-tags">Encrypt a file using AWS</span>
-    <span class="hero-tags">Encrypt a file using GCP</span>
-    <span class="hero-tags">Encrypt a file using Azure</span>
-    <span class="hero-tags">Encrypt a file using Age</span>
-    <span class="hero-tags">Encrypt a file using PGP</span>
-    <span class="hero-tags">Edit encrypted file</span>
-    <span class="hero-tags">Edit decrypted file</span>
+    <span class="hero-tags">Encrypt configuration</span>
+    <span class="hero-tags">Keep structure visible</span>
+    <span class="hero-tags">Access management through identities</span>
+    <span class="hero-tags">Offline and cloud based identities</span>
   </p>
   </div>
 
@@ -34,35 +30,46 @@ description: Simple And Flexible Tool For Managing Secrets
 
 {{% blocks/section color="white" type="row" %}}
 
-  {{% blocks/feature title="Key Groups" icon="fab fa-exchange fa-lg" %}}
-  By default, SOPS encrypts the data key for a file with each of the
-  master keys, such that if any of the master keys is available, the
-  file can be decrypted. However, it is sometimes desirable to require
-  access to multiple master keys in order to decrypt files. This can be
-  achieved with key groups.
+  {{% blocks/feature title="Encrypt configuration sensibly" icon="fa-exchange fa-lg" %}}
+  SOPS encrypts configuration files while keeping the structure visible.
+  Keys are not encrypted, while values and comments are encrypted.
+  This allows you to understand the configuration without seeing sensible values.
+  Also commented-out secrets aren't suddenly visible to everyone!
   {{% /blocks/feature %}}
 
-  {{% blocks/feature title="Auditing" icon="fab fa-box-open fa-lg" %}}
-  Sometimes, users want to be able to tell what files were accessed by
-  whom in an environment they control. For this reason, SOPS can
-  generate audit logs to record activity on encrypted files. When
-  enabled, SOPS will write a log entry into a pre-configured PostgreSQL
-  database when a file is decrypted.
+  {{% blocks/feature title="Various config file formats" icon="fa-box-open fa-lg" %}}
+  SOPS supports [YAML](https://yaml.org/), [JSON](https://www.json.org/),
+  and specific flavors of [INI](https://en.wikipedia.org/wiki/INI_file) and DotEnv configuration files.
+  You can also encrypt files completely through SOPS' "binary" store.
   {{% /blocks/feature %}}
 
-  {{% blocks/feature title="Key Service" icon="fab fa-plug fa-lg" %}}
-  There are situations where you might want to run SOPS on a machine
-  that doesn't have direct access to encryption keys such as PGP keys.
-  The sops key service allows you to forward a socket so that SOPS can
-  access encryption keys stored on a remote machine.
+  {{% blocks/feature title="Managing access through identities" icon="fa-users fa-lg" %}}
+  Access to configuration is managed through identities.
+  You can configure a set of identities that can access a file,
+  and also require multiple identities together that a user needs access to to decrypt a file.
   {{% /blocks/feature %}}
 
-  {{% blocks/feature title="Security" icon="fab fa-vector-square fa-lg" %}}
+  {{% blocks/feature title="Works offline and online" icon="fa-plug fa-lg" %}}
+  SOPS can use offline methods (Age, PGP/GnuPG)
+  and online methods (cloud based KMSes, secret management software)
+  to encrypt and decrypt a configuration's session key.
+  You can use SOPS in cloud infrastructure and also locally for disaster recovery.
+  {{% /blocks/feature %}}
+
+  {{% blocks/feature title="Security" icon="fa-key fa-lg" %}}
   The security of the data stored using SOPS is as strong as the weakest
-  cryptographic mechanism. Values are encrypted using AES256_GCM which
-  is the strongest symmetric encryption algorithm known today. Data keys
-  are encrypted in either KMS, which also uses AES256_GCM, or PGP which
-  uses either RSA or ECDSA keys.
+  cryptographic mechanism.
+  Values are encrypted using [AES256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+  in [GCM](https://en.wikipedia.org/wiki/Galois/Counter_Mode) mode.
+  How secure the key is stored depends on the identities used.
+  For example, you can use hybrid [post-quantum cryptographic](https://en.wikipedia.org/wiki/Post-quantum_cryptography) encryption through [Age](https://age-encryption.org/).
+  {{% /blocks/feature %}}
+
+  {{% blocks/feature title="Key stores" icon="fa-vector-square fa-lg" %}}
+  SOPS supports [Age](https://age-encryption.org/) and PGP/[GnuPG](https://www.gnupg.org/) for offline identities,
+  and [Amazon AWS KMS](https://aws.amazon.com/kms/), [Google Cloud KMS](https://docs.cloud.google.com/kms/docs),
+  [Azure KMS](https://en.wikipedia.org/wiki/Microsoft_Azure), [HuaweiCloud KMS](https://cloud.huawei.com/),
+  [HashiCorp Vault](https://www.hashicorp.com/en/products/vault), and [OpenBAO](https://openbao.org/) for online identities.
   {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
