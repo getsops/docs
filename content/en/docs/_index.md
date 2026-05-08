@@ -35,7 +35,7 @@ $ cd $GOPATH/src/github.com/getsops/sops/
 $ make install
 ```
 
-(requires Go >= 1.24)
+(requires Go >= 1.25)
 
 If you don\'t have Go installed, set it up with:
 
@@ -91,7 +91,7 @@ export AWS_SECRET_ACCESS_KEY="mw......"
 
 For more information and additional environment variables, see
 [specifying
-credentials](https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials).
+credentials](https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/configure-gosdk.html#specifying-credentials).
 
 If you want to use PGP, export the fingerprints of the public keys,
 comma separated, in the **SOPS_PGP_FP** env variable.
@@ -339,6 +339,22 @@ $ export SOPS_GCP_KMS_CLIENT_TYPE=rest  # Use REST client
 $ export SOPS_GCP_KMS_CLIENT_TYPE=grpc  # Use gRPC client (default)
 ```
 
+For sovereign cloud environments that expose a GCP-compatible KMS API at a
+non-standard endpoint (e.g. S3NS/Thales TPC: `cloudkms.s3nsapis.fr`),
+you can override the endpoint or the universe domain:
+
+``` sh
+# Override the KMS endpoint directly
+$ export SOPS_GCP_KMS_ENDPOINT=cloudkms.example.com:443
+
+# Or derive the endpoint from the universe domain (cloudkms.<domain>:443)
+$ export SOPS_GCP_KMS_UNIVERSE_DOMAIN=example.com
+```
+
+> 📝 **Note**
+>
+> `SOPS_GCP_KMS_ENDPOINT` takes precedence over `SOPS_GCP_KMS_UNIVERSE_DOMAIN` if both are set.
+
 Encrypting/decrypting with GCP KMS requires a KMS ResourceID. You can
 use the cloud console the get the ResourceID or you can create one using
 the gcloud sdk:
@@ -583,6 +599,16 @@ EOF
 
 $ sops encrypt --verbose prod/raw.yaml > prod/encrypted.yaml
 ```
+
+#### Restricting HC Vault servers that SOPS can talk to
+
+If you want to restrict which HC Vault servers SOPS is allowed to talk to, you can set the `SOPS_HC_VAULT_ALLOWLIST` environment variable.
+When set to `all` (the default value), there is no restriction.
+When set to `none`, SOPS will not allow any access to HC Vault servers for decryption or encryption.
+
+When set to any other value, this value will be interpreted as a comma-separated list of strings.
+If SOPS attempts to contact a vault URL that starts with one of these strings, SOPS will attempt to contact that URL.
+If there is no matching prefix in `SOPS_HC_VAULT_ALLOWLIST`, SOPS will not contact that URL.
 
 ### Encrypting using HuaweiCloud KMS
 
