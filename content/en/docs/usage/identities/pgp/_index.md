@@ -1,6 +1,7 @@
 ---
 title: "PGP / GnuPG"
 weight: 10
+description: You can use PGP / GnuPG to encrypt data.
 ---
 
 ## Test with the dev PGP key

@@ -1,6 +1,7 @@
 ---
 title: "Google Cloud KMS"
 weight: 50
+description: You can use Google Cloud's KMS to encrypt data.
 ---
 
 ## Encrypting using GCP KMS

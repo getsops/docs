@@ -1,6 +1,7 @@
 ---
 title: "HuaweiCloud KMS"
 weight: 70
+description: You can use HuaweiCloud's KMS to encrypt data.
 ---
 
 ## Encrypting using HuaweiCloud KMS

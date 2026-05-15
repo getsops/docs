@@ -1,6 +1,7 @@
 ---
 title: "HashiCorp Vault / OpenBao"
 weight: 60
+description: You can use HashiCorp Vault or OpenBao to encrypt data.
 ---
 
 ## Encrypting using Hashicorp Vault

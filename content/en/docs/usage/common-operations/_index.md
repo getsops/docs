@@ -1,6 +1,7 @@
 ---
 title: "Common operations"
 weight: 30
+description: Common operations with SOPS.
 ---
 
 ## Examples

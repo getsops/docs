@@ -1,6 +1,7 @@
 ---
 title: "Security"
 weight: 60
+description: More information on SOPS' security model.
 ---
 
 ## Reporting security issues

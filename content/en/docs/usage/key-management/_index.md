@@ -1,6 +1,7 @@
 ---
 title: "Key management"
 weight: 40
+description: How to manage keys with SOPS.
 ---
 
 ## Adding and removing keys

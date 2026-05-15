@@ -1,6 +1,7 @@
 ---
 title: "Azure KMS"
 weight: 40
+description: You can use Azure's KMS to encrypt data.
 ---
 
 ## Encrypting using Azure Key Vault
