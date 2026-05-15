@@ -181,6 +181,15 @@ params:
         icon: "fab fa-slack"
         desc: "Chat with other project developers"
 
+# Allow content to retrieve the PULL_REQUEST and BRANCH environment variables.
+# These are provided during Netlify builds:
+# https://docs.netlify.com/build/configure-builds/environment-variables/#git-metadata
+security:
+  funcs:
+    getenv:
+      - PULL_REQUEST
+      - BRANCH
+
 # hugo module configuration
 
 module:
