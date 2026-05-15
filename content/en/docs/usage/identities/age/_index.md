@@ -1,6 +1,7 @@
 ---
 title: "Age"
 weight: 20
+description: You can use age keys to encrypt data.
 ---
 
 ## Encrypting using age

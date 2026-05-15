@@ -1,6 +1,7 @@
 ---
 title: "Advanced usage"
 weight: 60
+description: Advanced SOPS usage.
 ---
 
 ## Encrypting and decrypting from other programs

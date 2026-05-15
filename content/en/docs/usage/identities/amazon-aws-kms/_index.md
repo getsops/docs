@@ -1,6 +1,7 @@
 ---
 title: "Amazon AWS KMS"
 weight: 30
+description: You can use Amazon AWS' KMS to encrypt data.
 ---
 
 ## KMS AWS Profiles

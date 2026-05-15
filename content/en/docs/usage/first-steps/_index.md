@@ -1,6 +1,7 @@
 ---
 title: "First steps"
 weight: 10
+description: First steps with SOPS.
 ---
 
 ## First steps

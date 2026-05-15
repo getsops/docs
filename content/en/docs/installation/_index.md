@@ -1,6 +1,7 @@
 ---
 title: "Installation"
 weight: 30
+description: How to install SOPS, or build it from source
 ---
 
 ## Stable release

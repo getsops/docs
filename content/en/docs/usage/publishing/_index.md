@@ -1,6 +1,7 @@
 ---
 title: "Publishing"
 weight: 50
+description: Publishing encrypted SOPS files.
 ---
 
 ## Using the publish command

@@ -1,6 +1,7 @@
 ---
-title: "Reference"
+title: "References"
 weight: 50
+description: More detailled information on some topics.
 ---
 
 ## Important information on types

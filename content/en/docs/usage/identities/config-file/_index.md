@@ -1,6 +1,7 @@
 ---
 title: "Config file"
 weight: 210
+description: How to use `.sops.yaml` config files to select which identities to use for new files.
 ---
 
 ## Using .sops.yaml conf to select KMS, PGP and age for new files

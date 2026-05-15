@@ -1,6 +1,7 @@
 ---
 title: "Key groups"
 weight: 200
+description: Key groups allow to require multiple identities together to edit or decrypt a file.
 ---
 
 ## Key groups
