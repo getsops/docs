@@ -1,0 +1,18 @@
+{{- /* https://docs.netlify.com/build/configure-builds/environment-variables/#git-metadata */ -}}
+{{- $is_pr := getenv "PULL_REQUEST" -}}
+{{- $branch := getenv "BRANCH" -}}
+{{- if or (ne $is_pr "true") (ne $branch "stable") -}}
+  {{- $color := "primary" -}}
+  <div class="pageinfo pageinfo-{{ $color }}">
+    <p>
+      {{- if eq $is_pr "true" -}}
+        This is a preview of a Pull Request for SOPS documentation.
+      {{- else if eq $branch "main" -}}
+        This is the development version of the SOPS documentation.
+      {{- else -}}
+        This is a preview of the SOPS documentation.
+      {{- end }}
+      The documentation for the latest SOPS release can be found on <a href="https://getsops.io/">getsops.io</a>.
+    </p>
+  </div>
+{{ end -}}
