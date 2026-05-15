@@ -14,7 +14,7 @@ There are two main documentation branches:
 
 * `main`: This is the branch where most work happens on.
   It should document the current state of [github.com/getsops/sops](https://github.com/getsops/sops)'s `main` branch.
-  This branch is published under [https://staging.getsops.io](https://staging.getsops.io).
+  This branch is published under [https://main.getsops.io](https://main.getsops.io).
 * `stable`: This is the branch that is published at [getsops.io](https://getsops.io/).
   The `main` branch is merged into it when a new SOPS release happens.
 
