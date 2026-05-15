@@ -21,7 +21,7 @@ Vault, HuaweiCloud KMS, age, and PGP.
 ## More information on...
 
 - [Installation](installation/)
-- [Basic Usage](basic-usage/)
+- [Usage](usage/)
 - [Reference](reference/)
 - [Security](security/)
 
