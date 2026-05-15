@@ -8,6 +8,18 @@ description: How to contribute to SOPS
 
 Check out [CONTRIBUTING.md in the getsops/sops GitHub repository](https://github.com/getsops/sops/blob/main/CONTRIBUTING.md).
 
+## Documentation branching
+
+There are two main documentation branches:
+
+* `main`: This is the branch where most work happens on.
+  It should document the current state of [github.com/getsops/sops](https://github.com/getsops/sops)'s `main` branch.
+  This branch is published under [https://staging.getsops.io](https://staging.getsops.io).
+* `stable`: This is the branch that is published at [getsops.io](https://getsops.io/).
+  The `main` branch is merged into it when a new SOPS release happens.
+
+Some work, like fixing typos, adjusting the design, etc., can happen directly on the `stable` branch (afterwards it needs to be merged back into `main`).
+
 ## Documentation contributions
 
 We use [Hugo](https://gohugo.io/) to format and generate our website, the
