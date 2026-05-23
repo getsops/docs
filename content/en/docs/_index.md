@@ -1860,6 +1860,19 @@ You can also specify these options in the `.sops.yaml` config file.
 > and `--unencrypted-comment-regex` are mutually exclusive and
 > cannot all be used in the same file.
 
+### Rotating secrets after a public key in a key group has been compromised
+
+First, remove the key from the key group in `.sops.yaml`, then run the following for each sops-encrypted file:
+
+``` sh
+sops updatekeys secret.sops.yaml
+sops rotate --in-place secret.sops.yaml
+```
+
+This ensures that *first* the compromised key is removed from the list of keys that has access to the per-file data key, and only *then* rotates the data key. If done in the wrong order, the data key is encrypted with a key that the compromised key still has access to.
+
+Only after this is done, should you start rotating the actual passwords, API keys and other secrets that are encrypted inside `secret.sops.yaml`. Otherwise, if you put in new credentials before completing this step, the compromised key would still have access to those.
+
 ## Config file format
 
 This section describes the format of the SOPS config file.
