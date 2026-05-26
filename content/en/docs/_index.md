@@ -1873,7 +1873,7 @@ This ensures that *first* the compromised key is removed from the list of keys t
 
 Running `sops rotate` periodically is recommended anyways.
 
-Only after this is done, should you start rotating the actual passwords, API keys and other secrets that are encrypted inside `secret.sops.yaml`. Otherwise, if you put in new credentials before completing this step, the compromised key would still have access to those.
+Only after this is done, should you start rotating the actual passwords, API keys and other secrets that are encrypted inside `secret.sops.yaml`. Otherwise, if you put in new credentials before completing this step, the compromised key could still have access to those.
 
 ## Config file format
 
