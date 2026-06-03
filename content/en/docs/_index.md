@@ -1873,7 +1873,7 @@ Commit and push the updated file.
 
 This ensures that *first* the compromised key is removed from the list of keys that has access to the per-file data key, and only *then* rotates the data key. If done in the wrong order, the compromised key could still have access to the data in some cases[^1].
 
-[^1]: While it is generally better to schedule the operations this way, doing it the other way is only a problem in two specific situations: secret.sops.yaml file is checked in between the two sops calls above; alternatively, the compromised key is with a cloud provider (AWS, Azure, GCP, HWC, Vault) which is compromised itself, so that the call to encrypt the document key actually stores that document key.
+[^1]: While it is generally better to schedule the operations this way, doing it the other way is only a problem in two specific situations: the `secret.sops.yaml` file is checked in between the two sops calls above; alternatively, the compromised key is with a cloud provider (AWS, Azure, GCP, HWC, Vault) which is compromised itself, so that the call to encrypt the document key actually stores that document key.
 
 Running `sops rotate` periodically is recommended anyways.
 
