@@ -1,5 +1,5 @@
 module github.com/google/docsy-example
 
-go 1.12
+go 1.25
 
-require github.com/google/docsy v0.14.2
+require github.com/google/docsy v0.15.0
