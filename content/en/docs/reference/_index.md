@@ -276,6 +276,16 @@ To directly specify a single key group, you can use the following keys:
         - tr-west-1:def67890-1234-5678-9012-345678901234
   ```
 
+* `stackit_kms` (comma-separated string, or list of strings): list of STACKIT KMS resource IDs
+  (format: `projects/<projectId>/regions/<regionId>/keyRings/<keyRingId>/keys/<keyId>/versions/<versionNumber>`).
+  Example:
+
+  ``` yaml
+  creation_rules:
+    - stackit_kms:
+        - projects/my-project-id/regions/eu01/keyRings/aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb/keys/cccccccc-4444-5555-6666-dddddddddddd/versions/1
+  ```
+
 To specify a list of key groups, you can use the following key:
 
 * `key_groups` (list of key group objects): a list of key group objects.
@@ -304,6 +314,8 @@ To specify a list of key groups, you can use the following key:
             - http://my.vault/v1/sops/keys/secondkey
           hckms:
             - tr-west-1:abc12345-6789-0123-4567-890123456789
+          stackit_kms:
+            - projects/my-project-id/regions/eu01/keyRings/aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb/keys/cccccccc-4444-5555-6666-dddddddddddd/versions/1
 
           merge:
             - pgp:
@@ -390,6 +402,17 @@ A key group supports the following keys:
 
   ``` yaml
   - key_id: tr-west-1:abc12345-6789-0123-4567-890123456789
+  ```
+
+* `stackit_kms` (list of objects): list of STACKIT KMS resource IDs.
+  Every object must have the following key:
+
+  * `resource_id` (string): the resource ID in format `projects/<projectId>/regions/<regionId>/keyRings/<keyRingId>/keys/<keyId>/versions/<versionNumber>`.
+
+  Example:
+
+  ``` yaml
+  - resource_id: projects/my-project-id/regions/eu01/keyRings/aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb/keys/cccccccc-4444-5555-6666-dddddddddddd/versions/1
   ```
 
 * `age` (list of strings): list of Age public keys.
