@@ -358,7 +358,7 @@ A key group supports the following keys:
   - resource_id: projects/mygcproject/locations/global/keyRings/mykeyring/cryptoKeys/thekey
   ```
 
-* `azure_keyvault`` (list of objects): list of Azure Key Vault resource identifiers.
+* `azure_keyvault` (list of objects): list of Azure Key Vault resource identifiers.
   Every object must have the following keys:
 
   * `vaultUrl` (string): the vault URL.
