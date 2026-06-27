@@ -209,10 +209,6 @@ sh-3.2$ cat out.json
 cat: out.json: Permission denied
 ```
 
-On the documentation breakdown (great work btw) the SOPS keyservice documentation got forgotten.
-
-the following was the content of that section:
-
 ## Using SOPS' Key Service
 
 There are situations where you might want to run SOPS on a machine that
