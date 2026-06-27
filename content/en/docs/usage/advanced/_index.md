@@ -208,3 +208,57 @@ uid=4294967294(nobody) gid=4294967294(nobody) groups=4294967294(nobody)
 sh-3.2$ cat out.json
 cat: out.json: Permission denied
 ```
+
+On the documentation breakdown (great work btw) the SOPS keyservice documentation got forgotten.
+
+the following was the content of that section:
+
+## Using SOPS' Key Service
+
+There are situations where you might want to run SOPS on a machine that
+doesn\'t have direct access to encryption keys such as PGP keys. The
+`sops` key service allows you to forward a socket so that SOPS can
+access encryption keys stored on a remote machine. This is similar to
+GPG Agent, but more portable.
+
+SOPS uses a client-server approach to encrypting and decrypting the data
+key. By default, SOPS runs a local key service in-process. SOPS uses a
+key service client to send an encrypt or decrypt request to a key
+service, which then performs the operation. The requests are sent using
+gRPC and Protocol Buffers. The requests contain an identifier for the
+key they should perform the operation with, and the plaintext or
+encrypted data key. The requests do not contain any cryptographic keys,
+public or private.
+
+**WARNING: the key service connection currently does not use any sort of
+authentication or encryption. Therefore, it is recommended that you make
+sure the connection is authenticated and encrypted in some other way,
+for example through an SSH tunnel.**
+
+Whenever we try to encrypt or decrypt a data key, SOPS will try to do so
+first with the local key service (unless it\'s disabled), and if that
+fails, it will try all other remote key services until one succeeds.
+
+You can start a key service server by running `sops keyservice`.
+
+You can specify the key services the `sops` binary uses with the
+`--keyservice` option. This flag can be specified more than once, so you can
+use multiple key services. Alternatively, a single key service can be specified
+by setting the `SOPS_KEYSERVICE` environment variable. The local key service
+can be disabled with `--enable-local-keyservice=false` or by setting the
+`SOPS_ENABLE_LOCAL_KEYSERVICE` environment variable to `false`.
+
+For example, to decrypt a file using both the local key service and the
+key service exposed on the unix socket located in `/tmp/sops.sock`, you
+can run:
+
+``` sh
+$ sops decrypt --keyservice unix:///tmp/sops.sock file.yaml
+```
+
+And if you only want to use the key service exposed on the unix socket
+located in `/tmp/sops.sock` and not the local key service, you can run:
+
+``` sh
+$ sops decrypt --enable-local-keyservice=false --keyservice unix:///tmp/sops.sock file.yaml
+```
