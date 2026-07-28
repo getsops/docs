@@ -10,7 +10,7 @@
       {{- else if eq $branch "main" -}}
         This is the development version of the SOPS documentation.
       {{- else -}}
-        This is a preview of the SOPS documentation.
+        This is a preview of the SOPS documentation for branch <code>{{ $branch | e }}</code>.
       {{- end }}
       The documentation for the latest SOPS release can be found on <a href="https://getsops.io/">getsops.io</a>.
     </p>
