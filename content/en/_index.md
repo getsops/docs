@@ -20,8 +20,8 @@ description: Simple And Flexible Tool For Managing Secrets
     <a {{% _param btn-lg primary %}} href="docs/">
       Learn more
     </a>
-    <a {{% _param btn-lg secondary %}} href="/docs/#download">
-      Download
+    <a {{% _param btn-lg secondary %}} href="/docs/installation/">
+      Install
     </a>
   </div>
 
