@@ -14,7 +14,7 @@ Binaries and packages of the latest stable release are available at
 For the adventurous, unstable features are available in the
 [main](https://github.com/getsops/sops/commits/main/) branch, which you can install from source:
 
-``` bash
+``` console
 $ mkdir -p $GOPATH/src/github.com/getsops/sops/
 $ git clone https://github.com/getsops/sops.git $GOPATH/src/github.com/getsops/sops/
 $ cd $GOPATH/src/github.com/getsops/sops/
@@ -25,7 +25,7 @@ $ make install
 
 If you don\'t have Go installed, set it up with:
 
-``` bash
+``` console
 $ {apt,yum,brew} install golang
 $ echo 'export GOPATH=~/go' >> ~/.bashrc
 $ source ~/.bashrc

@@ -38,7 +38,7 @@ creation_rules:
         FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4
 ```
 
-``` sh
+``` console
 $ sops updatekeys test.enc.yaml
 ```
 
@@ -57,11 +57,11 @@ creating new files.
 
 Use `updatekeys` if you want to add a key without rotating the data key.
 
-``` sh
-# add a new pgp key to the file and rotate the data key
+``` console
+$ # add a new pgp key to the file and rotate the data key
 $ sops rotate -i --add-pgp 85D77543B3D624B63CEA9E6DBC17301B491B3F21 example.yaml
 
-# remove a pgp key from the file and rotate the data key
+$ # remove a pgp key from the file and rotate the data key
 $ sops rotate -i --rm-pgp 85D77543B3D624B63CEA9E6DBC17301B491B3F21 example.yaml
 ```
 
@@ -107,7 +107,7 @@ in the file.
 Add the `-i` option to write the rotated file back, instead of printing
 it to stdout.
 
-``` sh
+``` console
 $ sops rotate example.yaml
 ```
 
@@ -115,9 +115,9 @@ $ sops rotate example.yaml
 
 First, remove the key from the key group in `.sops.yaml`, then run the following for each sops-encrypted file (only `secret.sops.yaml` in this example):
 
-``` sh
-sops updatekeys secret.sops.yaml
-sops rotate --in-place secret.sops.yaml
+``` console
+$ sops updatekeys secret.sops.yaml
+$ sops rotate --in-place secret.sops.yaml
 ```
 
 Commit and push the updated file.

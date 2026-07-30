@@ -23,7 +23,7 @@ result in an error.
 The command below creates a new file with a data key encrypted by KMS
 and PGP.
 
-``` sh
+``` console
 $ sops edit --kms "arn:aws:kms:us-west-2:927034868273:key/fe86dd69-4132-404c-ab86-4269956b4500" --pgp C9CAB0AF1165060DB58D6D6B2653B624D620786D /path/to/new/file.yaml
 ```
 
@@ -34,7 +34,7 @@ key. The path points to an existing cleartext file, so we give `sops`
 the flag `-e` to encrypt the file, and redirect the output to a
 destination file.
 
-``` sh
+``` console
 $ export SOPS_KMS_ARN="arn:aws:kms:us-west-2:927034868273:key/fe86dd69-4132-404c-ab86-4269956b4500"
 $ export SOPS_PGP_FP="C9CAB0AF1165060DB58D6D6B2653B624D620786D"
 $ sops encrypt /path/to/existing/file.yaml > /path/to/new/encrypted/file.yaml
@@ -42,7 +42,7 @@ $ sops encrypt /path/to/existing/file.yaml > /path/to/new/encrypted/file.yaml
 
 Decrypt the file with `-d`.
 
-``` sh
+``` console
 $ sops decrypt /path/to/new/encrypted/file.yaml
 ```
 
@@ -51,12 +51,12 @@ $ sops decrypt /path/to/new/encrypted/file.yaml
 Rather than redirecting the output of `-e` or `-d`, `sops` can replace
 the original file after encrypting or decrypting it.
 
-``` sh
-# file.yaml is in cleartext
+``` console
+$ # file.yaml is in cleartext
 $ sops encrypt -i /path/to/existing/file.yaml
-# file.yaml is now encrypted
+$ # file.yaml is now encrypted
 $ sops decrypt -i /path/to/existing/file.yaml
-# file.yaml is back in cleartext
+$ # file.yaml is back in cleartext
 ```
 
 ## Encrypting binary files
@@ -71,7 +71,7 @@ encrypted file larger than the cleartext one.
 
 In-place encryption/decryption also works on binary files.
 
-``` sh
+``` console
 $ dd if=/dev/urandom of=/tmp/somerandom bs=1024
 count=512
 512+0 records in
@@ -96,7 +96,7 @@ SOPS can extract a specific part of a YAML or JSON document, by provided
 the path in the `--extract` command line flag. This is useful to extract
 specific values, like keys, without needing an extra parser.
 
-``` sh
+``` console
 $ sops decrypt --extract '["app2"]["key"]' ~/git/svc/sops/example.yaml
 -----BEGIN RSA PRIVATE KEY-----
 MIIBPAIBAAJBAPTMNIyHuZtpLYc7VsHQtwOkWYobkUblmHWRmbXzlAX6K8tMf3Wf
@@ -113,7 +113,7 @@ The tree path syntax uses regular python dictionary syntax, without the
 variable name. Extract keys by naming them, and array elements by
 numbering them.
 
-``` sh
+``` console
 $ sops decrypt --extract '["an_array"][1]' ~/git/svc/sops/example.yaml
 secretuser2
 ```
@@ -124,7 +124,7 @@ SOPS can set a specific part of a YAML or JSON document, by providing
 the path and value in the `set` command. This is useful to set specific
 values, like keys, without needing an editor.
 
-``` sh
+``` console
 $ sops set ~/git/svc/sops/example.yaml '["app2"]["key"]' '"app2keystringvalue"'
 ```
 
@@ -132,24 +132,24 @@ The tree path syntax uses regular python dictionary syntax, without the
 variable name. Set to keys by naming them, and array elements by
 numbering them.
 
-``` sh
+``` console
 $ sops set ~/git/svc/sops/example.yaml '["an_array"][1]' '"secretuser2"'
 ```
 
 The value must be formatted as json.
 
-``` sh
+``` console
 $ sops set ~/git/svc/sops/example.yaml '["an_array"][1]' '{"uid1":null,"uid2":1000,"uid3":["bob"]}'
 ```
 
 You can also provide the value from a file or stdin:
 
-``` sh
-# Provide the value from a file
+``` console
+$ # Provide the value from a file
 $ echo '{"uid1":null,"uid2":1000,"uid3":["bob"]}' > /tmp/example-value
 $ sops set --value-file ~/git/svc/sops/example.yaml '["an_array"][1]' /tmp/example-value
 
-# Provide the value from stdin
+$ # Provide the value from stdin
 $ echo '{"uid1":null,"uid2":1000,"uid3":["bob"]}' | sops set --value-stdin ~/git/svc/sops/example.yaml '["an_array"][1]'
 ```
 
@@ -159,7 +159,7 @@ Symmetrically, SOPS can unset a specific part of a YAML or JSON document, by pro
 the path in the `unset` command. This is useful to unset specific values, like keys, without
 needing an editor.
 
-``` sh
+``` console
 $ sops unset ~/git/svc/sops/example.yaml '["app2"]["key"]'
 ```
 
@@ -167,7 +167,7 @@ The tree path syntax uses regular python dictionary syntax, without the
 variable name. Set to keys by naming them, and array elements by
 numbering them.
 
-``` sh
+``` console
 $ sops unset ~/git/svc/sops/example.yaml '["an_array"][1]'
 ```
 
@@ -190,7 +190,7 @@ Here we only care about YAML files. `sopsdiffer` is an arbitrary name
 that we map to a SOPS command in the git configuration file of the
 repository.
 
-``` sh
+``` console
 $ git config diff.sopsdiffer.textconv "sops decrypt"
 
 $ grep -A 1 sopsdiffer .git/config
@@ -234,7 +234,7 @@ A third method is to use the `--encrypted-regex` which will only encrypt
 values under keys that match the supplied regular expression. For
 example, this command:
 
-``` sh
+``` console
 $ sops encrypt --encrypted-regex '^(data|stringData)$' k8s-secrets.yaml
 ```
 
@@ -248,7 +248,7 @@ by using the `--unencrypted-regex` option, which will leave the values
 unencrypted of those keys that match the supplied regular expression.
 For example, this command:
 
-``` sh
+``` console
 $ sops encrypt --unencrypted-regex '^(description|metadata)$' k8s-secrets.yaml
 ```
 

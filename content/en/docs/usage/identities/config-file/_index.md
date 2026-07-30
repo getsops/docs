@@ -101,7 +101,7 @@ creation_rules:
 
 Creating a new file with the right keys is now as simple as
 
-``` sh
+``` console
 $ sops edit <newfile>.prod.yaml
 ```
 
