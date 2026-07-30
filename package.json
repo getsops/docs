@@ -9,6 +9,9 @@
   "license": "Apache-2.0",
   "bugs": "https://github.com/getsops/docs/issues",
   "spelling": "cSpell:ignore HTMLTEST precheck postbuild -",
+  "workspaces": [
+    "packages/hugoautogen"
+  ],
   "scripts": {
     "_build": "npm run _hugo-dev --",
     "_check:links": "echo IMPLEMENTATION PENDING for check-links; echo",
@@ -25,6 +28,7 @@
     "clean": "rm -Rf public/* resources",
     "local": "npm run _local -- npm run",
     "make:public": "git init -b main public",
+    "postinstall": "npm run update:docsy:pack",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "postbuild:preview": "npm run _check:links",
@@ -32,14 +36,21 @@
     "serve": "npm run _serve",
     "serveProduction": "npm run _serveProduction",
     "test": "npm run check:links",
-    "update:pkg:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest",
-    "update:pkg:hugo": "npm install --save-dev --save-exact hugo-extended@latest"
+    "update:docsy:mod": "hugo mod get -u github.com/google/docsy/theme",
+    "update:docsy:pack": "hugo mod npm pack && npm install --ignore-scripts",
+    "update:hugo": "npm install --save-dev --save-exact hugo-extended@latest",
+    "update:packages": "npm install --save-dev autoprefixer@latest postcss-cli@latest",
+    "update": "npm run update:packages && npm run update:docsy:mod"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.24",
+    "autoprefixer": "^10.5.4",
     "cross-env": "^10.1.0",
     "hugo-extended": "0.164.0",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
-  }
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "private": true
 }
