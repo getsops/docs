@@ -28,11 +28,9 @@ which tries several authentication methods, in this order:
 For example, you can use a Service Principal with the following
 environment variables:
 
-```
-AZURE_TENANT_ID
-AZURE_CLIENT_ID
-AZURE_CLIENT_SECRET
-```
+* `AZURE_TENANT_ID`,
+* `AZURE_CLIENT_ID`,
+* `AZURE_CLIENT_SECRET`.
 
 You can create a Service Principal using the CLI like this:
 
