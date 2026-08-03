@@ -76,8 +76,7 @@ $ keyvault_name=sops-$(uuidgen | tr -d - | head -c 16)
 $ # Create a Vault, a key, and give the service principal access:
 $ az keyvault create --name $keyvault_name --resource-group sops-rg --location westeurope
 $ az keyvault key create --name sops-key --vault-name $keyvault_name --protection software --ops encrypt decrypt
-$ az keyvault set-policy --name $keyvault_name --resource-group sops-rg --spn $AZURE_CLIENT_ID \
-    --key-permissions get encrypt decrypt
+$ az keyvault set-policy --name $keyvault_name --resource-group sops-rg --spn $AZURE_CLIENT_ID --key-permissions get encrypt decrypt
 $ # Read the key id:
 $ az keyvault key show --name sops-key --vault-name $keyvault_name --query key.kid
 
