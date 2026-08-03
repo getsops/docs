@@ -7,9 +7,9 @@ description: How to manage keys with SOPS.
 ## Adding and removing keys
 
 When creating new files, `sops` uses the PGP, KMS and GCP KMS defined in
-the command line arguments `--kms`, `--pgp`, `--gcp-kms`, `--hckms` or
-`--azure-kv`, or from the environment variables `SOPS_KMS_ARN`,
-`SOPS_PGP_FP`, `SOPS_GCP_KMS_IDS`, `SOPS_HUAWEICLOUD_KMS_IDS`, `SOPS_AZURE_KEYVAULT_URLS`. That
+the command line arguments `--kms`, `--pgp`, `--gcp-kms`, `--hckms`,
+`--stackit-kms` or `--azure-kv`, or from the environment variables `SOPS_KMS_ARN`,
+`SOPS_PGP_FP`, `SOPS_GCP_KMS_IDS`, `SOPS_HUAWEICLOUD_KMS_IDS`, `SOPS_STACKIT_KMS_IDS`, `SOPS_AZURE_KEYVAULT_URLS`. That
 information is stored in the file under the `sops` section, such that
 decrypting files does not require providing those parameters again.
 
@@ -49,10 +49,10 @@ be disabled by supplying the `-y` flag.
 
 The `rotate` command generates a new data encryption key and reencrypt
 all values with the new key. At the same time, the command line flag
-`--add-kms`, `--add-pgp`, `--add-gcp-kms`, `--add-hckms`, `--add-azure-kv`, `--rm-kms`,
-`--rm-pgp`, `--rm-gcp-kms`, `--rm-hckms` and `--rm-azure-kv` can be used to add and
+`--add-kms`, `--add-pgp`, `--add-gcp-kms`, `--add-hckms`, `--add-stackit-kms`, `--add-azure-kv`, `--rm-kms`,
+`--rm-pgp`, `--rm-gcp-kms`, `--rm-hckms`, `--rm-stackit-kms` and `--rm-azure-kv` can be used to add and
 remove keys from a file. These flags use the comma separated syntax as
-the `--kms`, `--pgp`, `--gcp-kms`, `--hckms` and `--azure-kv` arguments when
+the `--kms`, `--pgp`, `--gcp-kms`, `--hckms`, `--stackit-kms` and `--azure-kv` arguments when
 creating new files.
 
 Use `updatekeys` if you want to add a key without rotating the data key.
