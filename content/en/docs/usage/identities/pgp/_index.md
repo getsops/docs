@@ -9,7 +9,7 @@ description: You can use PGP / GnuPG to encrypt data.
 If you want to test **SOPS** without having to do a bunch of setup, you
 can use the example files and pgp key provided with the repository:
 
-``` sh
+``` console
 $ git clone https://github.com/getsops/sops.git
 $ cd sops
 $ gpg --import pgp/sops_functional_tests_key.asc

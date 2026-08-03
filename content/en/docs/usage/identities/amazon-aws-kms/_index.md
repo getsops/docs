@@ -89,7 +89,7 @@ to refine the access control of a given KMS master key.
 When creating a new file, you can specify the encryption context in the
 `--encryption-context` flag by comma separated list of key-value pairs:
 
-``` sh
+``` console
 $ sops edit --encryption-context Environment:production,Role:web-server test.dev.yaml
 ```
 

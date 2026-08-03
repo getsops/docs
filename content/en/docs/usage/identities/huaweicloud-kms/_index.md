@@ -24,7 +24,7 @@ export HUAWEICLOUD_SDK_PROJECT_ID="your-project-id"
 
 Alternatively, you can create a credentials file at `~/.huaweicloud/credentials`:
 
-``` sh
+``` console
 $ cat ~/.huaweicloud/credentials
 [default]
 ak = your-access-key
@@ -41,20 +41,20 @@ the HuaweiCloud API. The key ID format is `region:key-uuid` where:
 
 Now you can encrypt a file using:
 
-``` sh
+``` console
 $ sops encrypt --hckms tr-west-1:abc12345-6789-0123-4567-890123456789 test.yaml > test.enc.yaml
 ```
 
 Or using the environment variable:
 
-``` sh
+``` console
 $ export SOPS_HUAWEICLOUD_KMS_IDS="tr-west-1:abc12345-6789-0123-4567-890123456789"
 $ sops encrypt test.yaml > test.enc.yaml
 ```
 
 And decrypt it using:
 
-``` sh
+``` console
 $ sops decrypt test.enc.yaml
 ```
 

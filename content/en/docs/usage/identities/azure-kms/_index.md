@@ -28,15 +28,13 @@ which tries several authentication methods, in this order:
 For example, you can use a Service Principal with the following
 environment variables:
 
-``` bash
-AZURE_TENANT_ID
-AZURE_CLIENT_ID
-AZURE_CLIENT_SECRET
-```
+* `AZURE_TENANT_ID`,
+* `AZURE_CLIENT_ID`,
+* `AZURE_CLIENT_SECRET`.
 
 You can create a Service Principal using the CLI like this:
 
-``` sh
+``` console
 $ az ad sp create-for-rbac -n my-keyvault-sp
 
 {
@@ -68,17 +66,16 @@ https://${VAULT_URL}/keys/${KEY_NAME}/
 To create a Key Vault and assign your service principal permissions on
 it from the commandline:
 
-``` sh
-# Create a resource group if you do not have one:
+``` console
+$ # Create a resource group if you do not have one:
 $ az group create --name sops-rg --location westeurope
-# Key Vault names are globally unique, so generate one:
+$ # Key Vault names are globally unique, so generate one:
 $ keyvault_name=sops-$(uuidgen | tr -d - | head -c 16)
-# Create a Vault, a key, and give the service principal access:
+$ # Create a Vault, a key, and give the service principal access:
 $ az keyvault create --name $keyvault_name --resource-group sops-rg --location westeurope
 $ az keyvault key create --name sops-key --vault-name $keyvault_name --protection software --ops encrypt decrypt
-$ az keyvault set-policy --name $keyvault_name --resource-group sops-rg --spn $AZURE_CLIENT_ID \
-    --key-permissions get encrypt decrypt
-# Read the key id:
+$ az keyvault set-policy --name $keyvault_name --resource-group sops-rg --spn $AZURE_CLIENT_ID --key-permissions get encrypt decrypt
+$ # Read the key id:
 $ az keyvault key show --name sops-key --vault-name $keyvault_name --query key.kid
 
 https://sops.vault.azure.net/keys/sops-key/some-string
@@ -92,18 +89,18 @@ https://sops.vault.azure.net/keys/sops-key/some-string
 
 Now you can encrypt a file using:
 
-``` sh
+``` console
 $ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/some-string test.yaml > test.enc.yaml
 ```
 
 or, without the version:
 
-``` sh
+``` console
 $ sops encrypt --azure-kv https://sops.vault.azure.net/keys/sops-key/ test.yaml > test.enc.yaml
 ```
 
 And decrypt it using:
 
-``` sh
+``` console
 $ sops decrypt test.enc.yaml
 ```
