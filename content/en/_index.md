@@ -69,7 +69,8 @@ description: Simple And Flexible Tool For Managing Secrets
   SOPS supports [Age](https://age-encryption.org/) and PGP/[GnuPG](https://www.gnupg.org/) for offline identities,
   and [Amazon AWS KMS](https://aws.amazon.com/kms/), [Google Cloud KMS](https://docs.cloud.google.com/kms/docs),
   [Azure KMS](https://en.wikipedia.org/wiki/Microsoft_Azure), [HuaweiCloud KMS](https://cloud.huawei.com/),
-  [HashiCorp Vault](https://www.hashicorp.com/en/products/vault), and [OpenBAO](https://openbao.org/) for online identities.
+  [STACKIT KMS](https://stackit.com/), [HashiCorp Vault](https://www.hashicorp.com/en/products/vault),
+  and [OpenBAO](https://openbao.org/) for online identities.
   {{% /blocks/feature %}}
 
 {{% /blocks/section %}}
