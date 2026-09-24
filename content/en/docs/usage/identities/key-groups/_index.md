@@ -34,14 +34,14 @@ Management of key groups is done with the `sops groups` command.
 For example, you can add a new key group with 3 PGP keys and 3 KMS keys
 to the file `my_file.yaml`:
 
-``` sh
+``` console
 $ sops groups add --file my_file.yaml --pgp fingerprint1 --pgp fingerprint2 --pgp fingerprint3 --kms arn1 --kms arn2 --kms arn3
 ```
 
 Or you can delete the 1st group (group number 0, as groups are
 zero-indexed) from `my_file.yaml`:
 
-``` sh
+``` console
 $ sops groups delete --file my_file.yaml 0
 ```
 
@@ -84,7 +84,7 @@ with the master keys found in each group.
 
 For example:
 
-``` sh
+``` console
 $ sops edit --shamir-secret-sharing-threshold 2 example.json
 ```
 
@@ -126,6 +126,6 @@ will require master keys from two of the three different key groups in
 order to decrypt the file. You can then decrypt the file the same way as
 with any other SOPS file:
 
-``` sh
+``` console
 $ sops decrypt example.json
 ```

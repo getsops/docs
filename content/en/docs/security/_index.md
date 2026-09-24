@@ -112,7 +112,7 @@ encrypted PGP file: by referencing the pubkeys of each individual who
 has access to the file. It can easily be done by providing SOPS with a
 comma-separated list of public keys when creating a new file:
 
-``` sh
+``` console
 $ sops edit --pgp "E60892BB9BD89A69F759A1A0A3D652173B763E8F,84050F1D61AF7C230A12217687DF65059EF093D3,85D77543B3D624B63CEA9E6DBC17301B491B3F21" mynewfile.yaml
 ```
 

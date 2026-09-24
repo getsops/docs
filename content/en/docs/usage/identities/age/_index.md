@@ -14,7 +14,7 @@ You can encrypt a file for one or more age recipients (comma separated)
 using the `--age` option or the **SOPS_AGE_RECIPIENTS** environment
 variable:
 
-``` sh
+``` console
 $ sops encrypt --age age1yt3tfqlfrwdwx0z0ynwplcr6qxcxfaqycuprpmy89nr83ltx74tqdpszlw test.yaml > test.enc.yaml
 ```
 
@@ -76,7 +76,7 @@ creation_rules:
 
 It is also possible to use `updatekeys`, when adding or removing age recipients. For example:
 
-``` sh
+``` console
 $ sops updatekeys secret.enc.yaml
 2022/02/09 16:32:02 Syncing keys for file /iac/solution1/secret.enc.yaml
 The following changes will be made to the file's groups:

@@ -18,7 +18,7 @@ select the correct creation rule.
 
 The simplest way to decrypt data from stdin is as follows:
 
-``` sh
+``` console
 $ cat encrypted-data | sops decrypt > decrypted-data
 ```
 
@@ -31,7 +31,7 @@ To avoid this, you can either provide a filename with `--filename-override`,
 or explicitly control the input and output formats by passing
 `--input-type` and `--output-type` as appropriate:
 
-``` sh
+``` console
 $ cat encrypted-data | sops decrypt --filename-override filename.yaml > decrypted-data
 $ cat encrypted-data | sops decrypt --input-type yaml --output-type yaml > decrypted-data
 ```
@@ -45,7 +45,7 @@ look up the correct creation rule from `.sops.yaml`. Therefore, you must
 provide the `--filename-override` parameter which allows you to tell
 SOPS which filename to use to match creation rules:
 
-``` sh
+``` console
 $ echo 'foo: bar' | sops encrypt --filename-override path/filename.sops.yaml > encrypted-data
 ```
 
@@ -55,7 +55,7 @@ filename will also be used to determine the input and output store. As
 always, the input store type can be adjusted by passing `--input-type`,
 and the output store type by passing `--output-type`:
 
-``` sh
+``` console
 $ echo foo=bar | sops encrypt --filename-override path/filename.sops.yaml --input-type dotenv > encrypted-data
 ```
 
@@ -115,8 +115,8 @@ respectively. For example, if a program looks for credentials in its
 environment, `exec-env` can be used to ensure that the decrypted
 contents are available only to this process and never written to disk.
 
-``` sh
-# print secrets to stdout to confirm values
+``` console
+$ # print secrets to stdout to confirm values
 $ sops decrypt out.json
 {
         "database_password": "jf48t9wfw094gf4nhdf023r",
@@ -124,18 +124,18 @@ $ sops decrypt out.json
         "AWS_SECRET_KEY": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }
 
-# decrypt out.json and run a command
-# the command prints the environment variable and runs a script that uses it
+$ # decrypt out.json and run a command
+$ # the command prints the environment variable and runs a script that uses it
 $ sops exec-env out.json 'echo secret: $database_password; ./database-import'
 secret: jf48t9wfw094gf4nhdf023r
 
-# launch a shell with the secrets available in its environment
+$ # launch a shell with the secrets available in its environment
 $ sops exec-env out.json 'sh'
-sh-3.2# echo $database_password
+$ echo $database_password
 jf48t9wfw094gf4nhdf023r
 
-# the secret is not accessible anywhere else
-sh-3.2$ exit
+$ # the secret is not accessible anywhere else
+$ exit
 $ echo your password: $database_password
 your password:
 ```
@@ -154,9 +154,9 @@ the process is finished executing. `exec-file` behaves similar to
 will be substituted with the temporary file path (whether a FIFO or an
 actual file).
 
-``` sh
-# operating on the same file as before, but as a file this time
-$ sops exec-file out.json 'echo your temporary file: {}; cat {}'
+``` console
+% # operating on the same file as before, but as a file this time
+% sops exec-file out.json 'echo your temporary file: {}; cat {}'
 your temporary file: /tmp/.sops894650499/tmp-file
 {
         "database_password": "jf48t9wfw094gf4nhdf023r",
@@ -164,21 +164,21 @@ your temporary file: /tmp/.sops894650499/tmp-file
         "AWS_SECRET_KEY": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }
 
-# launch a shell with a variable TMPFILE pointing to the temporary file
-$ sops exec-file --no-fifo out.json 'TMPFILE={} sh'
-sh-3.2$ echo $TMPFILE
+% # launch a shell with a variable TMPFILE pointing to the temporary file
+% sops exec-file --no-fifo out.json 'TMPFILE={} sh'
+$ echo $TMPFILE
 /tmp/.sops506055069/tmp-file291138648
-sh-3.2$ cat $TMPFILE
+$ cat $TMPFILE
 {
         "database_password": "jf48t9wfw094gf4nhdf023r",
         "AWS_ACCESS_KEY_ID": "AKIAIOSFODNN7EXAMPLE",
         "AWS_SECRET_KEY": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
 }
-sh-3.2$ ./program --config $TMPFILE
-sh-3.2$ exit
+$ ./program --config $TMPFILE
+$ exit
 
-# try to open the temporary file from earlier
-$ cat /tmp/.sops506055069/tmp-file291138648
+% # try to open the temporary file from earlier
+% cat /tmp/.sops506055069/tmp-file291138648
 cat: /tmp/.sops506055069/tmp-file291138648: No such file or directory
 ```
 
@@ -192,20 +192,20 @@ possible for added security.
 To overwrite the default file name (`tmp-file`) in `exec-file` use the
 `--filename <filename>` parameter.
 
-``` sh
-# the encrypted file can't be read by the current user
-$ cat out.json
+``` console
+% # the encrypted file can't be read by the current user
+% cat out.json
 cat: out.json: Permission denied
 
-# execute sops as root, decrypt secrets, then drop privileges
-$ sudo sops exec-env --user nobody out.json 'sh'
-sh-3.2$ echo $database_password
+% # execute sops as root, decrypt secrets, then drop privileges
+% sudo sops exec-env --user nobody out.json 'sh'
+$ echo $database_password
 jf48t9wfw094gf4nhdf023r
 
-# dropped privileges, still can't load the original file
-sh-3.2$ id
+$ # dropped privileges, still can't load the original file
+$ id
 uid=4294967294(nobody) gid=4294967294(nobody) groups=4294967294(nobody)
-sh-3.2$ cat out.json
+$ cat out.json
 cat: out.json: Permission denied
 ```
 
@@ -248,13 +248,13 @@ For example, to decrypt a file using both the local key service and the
 key service exposed on the unix socket located in `/tmp/sops.sock`, you
 can run:
 
-``` sh
+``` console
 $ sops decrypt --keyservice unix:///tmp/sops.sock file.yaml
 ```
 
 And if you only want to use the key service exposed on the unix socket
 located in `/tmp/sops.sock` and not the local key service, you can run:
 
-``` sh
+``` console
 $ sops decrypt --enable-local-keyservice=false --keyservice unix:///tmp/sops.sock file.yaml
 ```

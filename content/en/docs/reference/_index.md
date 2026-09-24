@@ -19,7 +19,7 @@ be decrypted in the same format. The easiest way to achieve this is to
 conserve the original file extension after encrypting a file. For
 example:
 
-``` sh
+``` console
 $ sops encrypt -i myfile.json
 $ sops decrypt myfile.json
 ```
@@ -28,7 +28,7 @@ If you want to change the extension of the file once encrypted, you need
 to provide `sops` with the `--input-type` flag upon decryption. For
 example:
 
-``` sh
+``` console
 $ sops encrypt myfile.json > myfile.json.enc
 
 $ sops decrypt --input-type json myfile.json.enc
@@ -37,7 +37,7 @@ $ sops decrypt --input-type json myfile.json.enc
 When operating on stdin, use the `--input-type` and `--output-type`
 flags as follows:
 
-``` sh
+``` console
 $ cat myfile.json | sops decrypt --input-type json --output-type json
 ```
 

@@ -15,8 +15,8 @@ console and export them, comma separated, in the **SOPS_KMS_ARN** env
 variable. It is recommended to use at least two master keys in different
 regions.
 
-``` bash
-export SOPS_KMS_ARN="arn:aws:kms:us-east-1:656532927350:key/920aff2e-c5f1-4040-943a-047fa387b27e,arn:aws:kms:ap-southeast-1:656532927350:key/9006a8aa-0fa6-4c14-930e-a2dfb916de1d"
+``` console
+$ export SOPS_KMS_ARN="arn:aws:kms:us-east-1:656532927350:key/920aff2e-c5f1-4040-943a-047fa387b27e,arn:aws:kms:ap-southeast-1:656532927350:key/9006a8aa-0fa6-4c14-930e-a2dfb916de1d"
 ```
 
 SOPS uses [aws-sdk-go-v2](https://github.com/aws/aws-sdk-go-v2) to
@@ -26,7 +26,7 @@ from the `~/.aws/credentials` file which can be created with the
 
 An example of the `~/.aws/credentials` file is shown below:
 
-``` sh
+``` console
 $ cat ~/.aws/credentials
 [default]
 aws_access_key_id = AKI.....
@@ -37,9 +37,9 @@ In addition to the `~/.aws/credentials` file, you can also use the
 `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables to
 specify your credentials:
 
-``` bash
-export AWS_ACCESS_KEY_ID="AKI......"
-export AWS_SECRET_ACCESS_KEY="mw......"
+``` console
+$ export AWS_ACCESS_KEY_ID="AKI......"
+$ export AWS_SECRET_ACCESS_KEY="mw......"
 ```
 
 For more information and additional environment variables, see
@@ -49,8 +49,8 @@ credentials](https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/configure
 If you want to use PGP, export the fingerprints of the public keys,
 comma separated, in the **SOPS_PGP_FP** env variable.
 
-``` bash
-export SOPS_PGP_FP="85D77543B3D624B63CEA9E6DBC17301B491B3F21,E60892BB9BD89A69F759A1A0A3D652173B763E8F"
+``` console
+$ export SOPS_PGP_FP="85D77543B3D624B63CEA9E6DBC17301B491B3F21,E60892BB9BD89A69F759A1A0A3D652173B763E8F"
 ```
 
 > 📝 **Note**
@@ -61,7 +61,7 @@ Then simply call `sops edit` with a file path as argument. It will
 handle the encryption/decryption transparently and open the cleartext
 file in an editor
 
-``` sh
+``` console
 $ sops edit mynewtestfile.yaml
 mynewtestfile.yaml doesn't exist, creating it.
 please wait while an encryption key is being generated and stored in a secure fashion
@@ -116,7 +116,7 @@ you will be able to access your data.
 
 To decrypt a file in a `cat` fashion, use the `-d` flag:
 
-``` sh
+``` console
 $ sops decrypt mynewtestfile.yaml
 ```
 
@@ -126,7 +126,7 @@ necessary permissions on KMS keys.
 
 Given that, the only command a SOPS user needs is:
 
-``` sh
+``` console
 $ sops edit <file>
 ```
 
