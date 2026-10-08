@@ -6,8 +6,8 @@ description: How to use `.sops.yaml` config files to select which identities to 
 
 ## Using .sops.yaml conf to select KMS, PGP and age for new files
 
-It is often tedious to specify the `--kms` `--gcp-kms` `--hckms` `--pgp` and
-`--age` parameters for creation of all new files. If your secrets are
+It is often tedious to specify the `--kms` `--gcp-kms` `--hckms` `--stackit-kms`
+`--pgp` and `--age` parameters for creation of all new files. If your secrets are
 stored under a specific directory, like a `git` repository, you can
 create a `.sops.yaml` configuration file at the root directory to define
 which keys are used for which filename.
@@ -54,6 +54,10 @@ creation_rules:
     # hckms files using HuaweiCloud KMS
     - path_regex: \.hckms\.yaml$
       hckms: tr-west-1:abc12345-6789-0123-4567-890123456789,tr-west-2:def67890-1234-5678-9012-345678901234
+
+    # stackit files using STACKIT KMS
+    - path_regex: \.stackit\.yaml$
+      stackit_kms: projects/my-project-id/regions/eu01/keyRings/aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb/keys/cccccccc-4444-5555-6666-dddddddddddd/versions/1
 
     # Finally, if the rules above have not matched, this one is a
     # catchall that will encrypt the file using KMS set C as well as PGP
