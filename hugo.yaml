@@ -30,13 +30,13 @@ permalinks:
 imaging:
   resampleFilter: "CatmullRom"
   quality: 75
-  anchor: "smart"
+  anchor: "Smart"
 
 # Language configuration
 
 languages:
   en:
-    languageName: "English"
+    label: "English"
     # Weight used for sorting.
     weight: 1
 
@@ -199,5 +199,5 @@ module:
     extended: true
     min: "0.161.1"
   imports:
-    path: "github.com/google/docsy"
-    disable: false
+    - path: github.com/google/docsy/theme
+      disable: false
