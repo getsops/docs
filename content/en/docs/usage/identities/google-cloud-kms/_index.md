@@ -13,32 +13,32 @@ the use of access token.
 
 Using Application Default Credentials you can authorize by doing this:
 
-``` sh
+``` console
 $ gcloud auth login
 ```
 
 you can enable application default credentials using the sdk:
 
-``` sh
+``` console
 $ gcloud auth application-default login
 ```
 
 Using OAauth tokens you can authorize by doing this:
 
-``` sh
+``` console
 $ export GOOGLE_OAUTH_ACCESS_TOKEN=<your access token>
 ```
 
 Or if you are logged in you can authorize by generating an access token:
 
-``` sh
+``` console
 $ export GOOGLE_OAUTH_ACCESS_TOKEN="$(gcloud auth print-access-token)"
 ```
 
 By default, SOPS uses the gRPC client to communicate with GCP KMS. You can optionally
 switch to the REST client by setting the `SOPS_GCP_KMS_CLIENT_TYPE` environment variable:
 
-``` sh
+``` console
 $ export SOPS_GCP_KMS_CLIENT_TYPE=rest  # Use REST client
 $ export SOPS_GCP_KMS_CLIENT_TYPE=grpc  # Use gRPC client (default)
 ```
@@ -47,11 +47,11 @@ For sovereign cloud environments that expose a GCP-compatible KMS API at a
 non-standard endpoint (e.g. S3NS/Thales TPC: `cloudkms.s3nsapis.fr`),
 you can override the endpoint or the universe domain:
 
-``` sh
-# Override the KMS endpoint directly
+``` console
+$ # Override the KMS endpoint directly
 $ export SOPS_GCP_KMS_ENDPOINT=cloudkms.example.com:443
 
-# Or derive the endpoint from the universe domain (cloudkms.<domain>:443)
+$ # Or derive the endpoint from the universe domain (cloudkms.<domain>:443)
 $ export SOPS_GCP_KMS_UNIVERSE_DOMAIN=example.com
 ```
 
@@ -63,24 +63,22 @@ Encrypting/decrypting with GCP KMS requires a KMS ResourceID. You can
 use the cloud console the get the ResourceID or you can create one using
 the gcloud sdk:
 
-``` sh
+``` console
 $ gcloud kms keyrings create sops --location global
 $ gcloud kms keys create sops-key --location global --keyring sops --purpose encryption
 $ gcloud kms keys list --location global --keyring sops
-
-# you should see
 NAME                                                                   PURPOSE          PRIMARY_STATE
 projects/my-project/locations/global/keyRings/sops/cryptoKeys/sops-key ENCRYPT_DECRYPT  ENABLED
 ```
 
 Now you can encrypt a file using:
 
-``` sh
+``` console
 $ sops encrypt --gcp-kms projects/my-project/locations/global/keyRings/sops/cryptoKeys/sops-key test.yaml > test.enc.yaml
 ```
 
 And decrypt it using:
 
-``` sh
+``` console
 $ sops decrypt test.enc.yaml
 ```

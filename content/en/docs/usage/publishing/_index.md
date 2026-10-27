@@ -69,7 +69,7 @@ same data as the source file, it will be skipped.
 Below is an example of publishing to Vault (using token auth with a
 local dev instance of Vault).
 
-``` sh
+``` console
 $ export VAULT_TOKEN=...
 $ export VAULT_ADDR='http://127.0.0.1:8200'
 $ sops decrypt vault/test.yaml

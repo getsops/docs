@@ -12,11 +12,11 @@ instance of Vault, refer to Hashicorp\'s official documentation.
 
 To easily deploy Vault locally: (DO NOT DO THIS FOR PRODUCTION!!!)
 
-``` sh
+``` console
 $ docker run -d -p8200:8200 vault:1.2.0 server -dev -dev-root-token-id=toor
 ```
 
-``` sh
+``` console
 $ # Substitute this with the address Vault is running on
 $ export VAULT_ADDR=http://127.0.0.1:8200 
 
